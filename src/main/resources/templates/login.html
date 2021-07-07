@@ -4,11 +4,27 @@
 <meta charset="UTF-8">
 <title >ログイン</title>
 </head>
-<body>
-<a href="/">トップ</a>
-<h1>ログイン</h1>
-<br>
+<style>
+	h1 {
+	margin:50px;
+	text-align:center;
+	}
 
+	table {
+	text-align:center;
+	margin:auto;
+	}
+
+	p {
+	text-align:center;
+	}
+
+	.signup {
+	text-align:center;
+	}
+</style>
+<body>
+<h1>ログイン</h1>
 <form action="/login" method="post">
 	<div th:text="${end}" style="color: red;" ></div>
 	<div th:text="${error}" style="color: red;" ></div>
@@ -16,12 +32,14 @@
 	<br>
 	<table border="1">
 		<tr><th>メールアドレス</th><td><input type="text" name="email"></td></tr>
-		<tr><th>パスワード</th><td><input type="text" name="Password"></td></tr>
+		<tr><th>パスワード</th><td><input type="password" name="Password"></td></tr>
 	</table>
 	<br>
-<input type="submit" value="ログイン">
+<p><input type="submit" value="ログイン"></p>
 </form>
 <br>
-<a href="/signup">新規会員登録</a>はこちら
+<div class="signup">
+<a href="/signup">新規登録</a>はこちら
+</div>
 </body>
 </html>
