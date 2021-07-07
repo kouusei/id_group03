@@ -4,25 +4,7 @@
 <meta charset="UTF-8">
 <title >ログイン</title>
 </head>
-<style>
-	h1 {
-	margin:50px;
-	text-align:center;
-	}
-
-	table {
-	text-align:center;
-	margin:auto;
-	}
-
-	p {
-	text-align:center;
-	}
-
-	.signup {
-	text-align:center;
-	}
-</style>
+<link th:href="@{/css/style2.css}" rel="stylesheet" type="text/css">
 <body>
 <h1>ログイン</h1>
 <form action="/login" method="post">
@@ -31,8 +13,8 @@
 	<div th:text="${error2}" style="color: red;" ></div>
 	<br>
 	<table border="1">
-		<tr><th>メールアドレス</th><td><input type="text" name="email"></td></tr>
-		<tr><th>パスワード</th><td><input type="password" name="Password"></td></tr>
+		<tr><th>メールアドレス</th><td><input type="email" name="email"></td></tr>
+		<tr><th>パスワード</th><td><input type="password" name="password"></td></tr>
 	</table>
 	<br>
 <p><input type="submit" value="ログイン"></p>

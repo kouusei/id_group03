@@ -4,25 +4,7 @@
 <meta charset="UTF-8">
 <title >新規登録</title>
 </head>
-<style>
-	h1 {
-	margin:50px;
-	text-align:center;
-	}
-
-	table {
-	text-align:center;
-	margin:auto;
-	}
-
-	p {
-	text-align:center;
-	}
-
-	.login {
-	text-align:center;
-	}
-</style>
+<link th:href="@{/css/style3.css}" rel="stylesheet" type="text/css">
 <body>
 <h1>新規登録</h1>
 <form action="/signup" method="post">
@@ -30,7 +12,7 @@
 	<br>
 	<table border="1">
 		<tr><th>名前</th><td><input type="text" name="NAME"></td></tr>
-		<tr><th>メールアドレス</th><td><input type="text" name="EMAIL"></td></tr>
+		<tr><th>メールアドレス</th><td><input type="email" name="EMAIL"></td></tr>
 		<tr><th>パスワード</th><td><input type="text" name="PASS"></td></tr>
 	</table>
 	<br>

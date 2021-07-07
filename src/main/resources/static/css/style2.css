@@ -1,0 +1,23 @@
+@charset "UTF-8";
+
+h1 {
+	margin: 50px;
+	text-align: center;
+}
+
+table {
+	text-align: center;
+	margin: auto;
+}
+
+p {
+	text-align: center;
+}
+
+.signup {
+	text-align: center;
+}
+
+div {
+	text-align: center;
+}
