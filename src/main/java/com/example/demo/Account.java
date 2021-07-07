@@ -25,6 +25,10 @@ public class Account {
 	@Column(name="password")
 	private String password;
 
+	public Account() {
+
+	}
+
 	public Account(int code, String name, String email, String password) {
 		this.code = code;
 		this.name = name;
