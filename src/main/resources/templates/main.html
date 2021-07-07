@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title >アカウント一覧</title>
+</head>
+<body>
+<a href="/">トップ</a><br>
+<span th:if="${session.login != null}">こんにちは、<a th:text="${session.login}"></a>さん</span><br>
+<h1>アカウント情報</h1>
+<br>
+<table border="1">
+	<tr><th>名前</th><th>メールアドレス</th><th>パスワード</th></tr>
+	<tr th:each=User:${list}>
+		<td><span th:text="${User.name}"></span></td>
+		<td><span th:text="${User.email}"></span></td>
+		<td><span th:text="${User.pass}"></span></td>
+	</tr>
+</table>
+<br>
+<a href="/logout">ログアウト</a>
+</body>
+</html>
