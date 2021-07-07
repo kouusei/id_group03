@@ -1,7 +1,8 @@
-/**
- *
- */
+/*
+カレンダー作成
+*/
 
+//カレンダーの年範囲を作成
 function generate_year_range(start, end) {
   var years = "";
   for (var year = start; year <= end; year++) {
@@ -10,13 +11,13 @@ function generate_year_range(start, end) {
   return years;
 }
 
-var today = new Date();
-var currentMonth = today.getMonth();
-var currentYear = today.getFullYear();
-var selectYear = document.getElementById("year");
-var selectMonth = document.getElementById("month");
+var today = new Date(); //日付
+var currentMonth = today.getMonth(); //月
+var currentYear = today.getFullYear(); //年
+var selectYear = document.getElementById("year"); //年の選択
+var selectMonth = document.getElementById("month"); //月の選択
 
-var createYear = generate_year_range(1970, 2200);
+var createYear = generate_year_range(1970, 2200); //カレンダーの年範囲
 
 document.getElementById("year").innerHTML = createYear;
 

@@ -1,6 +1,9 @@
+var a=1;
+
 /**
  *
  */
+
 
 function generate_year_range(start, end) {
   var years = "";
