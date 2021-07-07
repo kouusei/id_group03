@@ -8,6 +8,7 @@
 <a href="/">トップ</a>
 <h1>新規会員登録</h1>
 <br>
+<!-- 登録ボタンを押したらコントローラーのPostMapping("/signup")に飛ばして、そこでlogin画面に飛ばす-->
 <form action="/signup" method="post">
 	<div th:text="${error}" style="color: red;" ></div>
 	<br>
