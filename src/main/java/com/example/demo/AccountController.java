@@ -116,17 +116,19 @@ public class AccountController {
 	}
 
 	//スケジュール画面へ遷移
-	@RequestMapping("/calender/{date}")
+	@RequestMapping("/calender/{date}/{month}/{year}")
 	public ModelAndView calender(
 			@PathVariable(name="date") int date,
+			@PathVariable(name="month") int month,
+			@PathVariable(name="year") int year,
 //			@RequestParam("date") int date,
 //			@RequestParam("month") int month,
 //			@RequestParam("year") int year,
 			ModelAndView mv) {
 
 		//登録するDateのインスタンスを生成
-//		Date sche = new Date(date, month, year);
-		Date sche = new Date(date);
+		Date sche = new Date(date, month, year);
+		//Date sche = new Date(date);
 
 		mv.addObject("sche",sche);
 		mv.setViewName("schedule");

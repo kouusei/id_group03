@@ -77,6 +77,7 @@ function showCalendar(month, year) {
 
   // creating all cells（カレンダーを格納するセルの作成）
   var date = 1;
+
   for ( var i = 0; i < 6; i++ ) {
       var row = document.createElement("tr");
 
@@ -95,7 +96,7 @@ function showCalendar(month, year) {
               cell.className = "date-picker";
 
               //セルに日付を入れる
-              cell.innerHTML = "<span>" +'<a href="/calender'+ date +'">'+ date +"</a>" + "</span>";
+              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + month + "/"+ year + '">'+ date +"</a>" + "</span>";
 
               if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
                   cell.className = "date-picker selected";
