@@ -96,7 +96,7 @@ function showCalendar(month, year) {
               cell.className = "date-picker";
 
               //セルに日付を入れる
-              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + month + "/"+ year + '">'+ date +"</a>" + "</span>";
+              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+ date +"</a>" + "</span>";
 
               if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
                   cell.className = "date-picker selected";
