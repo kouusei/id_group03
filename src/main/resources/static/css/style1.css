@@ -1,11 +1,34 @@
 @charset "UTF-8";
 
 h1 {
-	margin: 50px;
+	margin: 75px;
 	text-align: center;
+}
+
+table {
+	text-align: center;
+	width:340px;
+	height:140px;
+	margin: auto;
 }
 
 p {
 	text-align: center;
-	font-size: 35px;
+}
+
+input.btn-border {
+	border: 2px solid #000;
+	border-radius: 0;
+	background: #fff;
+	font-weight: bold;
+	font-size:25px;
+}
+
+input.btn-border:hover {
+	color: #fff;
+	background: #000;
+}
+
+body {
+	background-color:white;
 }
