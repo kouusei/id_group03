@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -114,4 +115,21 @@ public class AccountController {
 		}
 	}
 
+	//スケジュール画面へ遷移
+	@RequestMapping("/calender/{date}")
+	public ModelAndView calender(
+			@PathVariable(name="date") int date,
+//			@RequestParam("date") int date,
+//			@RequestParam("month") int month,
+//			@RequestParam("year") int year,
+			ModelAndView mv) {
+
+		//登録するDateのインスタンスを生成
+//		Date sche = new Date(date, month, year);
+		Date sche = new Date(date);
+
+		mv.addObject("sche",sche);
+		mv.setViewName("schedule");
+		return mv;
+	}
 }
