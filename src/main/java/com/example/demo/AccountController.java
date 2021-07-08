@@ -55,7 +55,7 @@ public class AccountController {
 
 		} else {
 			//Accountテーブルから指定したレコードを取得
-			List<Account> record = accountRepository.findByEmailLikeAndPasswordLike(email,password);
+			List<Account> record = accountRepository.findByEmailLikeAndPasswordLike(email, password);
 
 			if (record.size() == 0) {
 				mv.addObject("error", "メールアドレスかパスワードが一致しません");
@@ -84,10 +84,34 @@ public class AccountController {
 
 	//新規登録後
 	@PostMapping("/signup")
-	public ModelAndView signup_after(ModelAndView mv) {
+	public ModelAndView signup_error(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("password2") String password2,
+			ModelAndView mv) {
 
-		mv.setViewName("login");
+		//未入力、パスワードが違えばエラー表示
+		if (name == "" || email == "" || password == "" || password2 == "") {
+			mv.addObject("error", "未入力項目があります。");
+			mv.setViewName("signup");
+			return mv;
 
-		return mv;
+		} else if (!password.equals(password2)) {
+			mv.addObject("error", "パスワードが一致していません");
+			mv.setViewName("signup");
+			return mv;
+
+		} else{
+			//登録するAccountエンティティのインスタンスを生成
+			Account account = new Account(name, email, password);
+
+			accountRepository.saveAndFlush(account);
+			mv.addObject("error", "新規登録できました。");
+			mv.setViewName("login");
+			return mv;
+
+		}
 	}
+
 }
