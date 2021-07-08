@@ -22,7 +22,7 @@ var createYear = generate_year_range(1970, 2200); //カレンダーの年範囲
 document.getElementById("year").innerHTML = createYear;
 
 var calendar = document.getElementById("calendar");
-var lang = calendar.getAttribute('data-lang');
+var lang = calendar.getAttribute('data-lang'); //言語
 
 var months = ["1月", "2月", "3月", "4月", "5月", "6月", "7月", "8月", "9月", "10月", "11月", "12月"];
 var days = ["日", "月", "火", "水", "木", "金", "土"];
