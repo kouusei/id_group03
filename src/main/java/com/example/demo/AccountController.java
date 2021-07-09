@@ -134,13 +134,20 @@ public class AccountController {
 	}
 
 	//カレンダー画面へ戻る
-	@PostMapping("/calender")
-	public ModelAndView calender(ModelAndView mv) {
+		@PostMapping("/calender")
+		public ModelAndView returncalender(
+				@RequestParam("DATE") int date,
+				@RequestParam("MONTH") int month,
+				@RequestParam("YEAR") int year,
+				ModelAndView mv) {
+			//登録するDateのインスタンスを生成
+			Date cale = new Date(date, month, year);
 
-		mv.setViewName("calender");
+			mv.addObject("cale",cale);
+			mv.setViewName("calender");
 
-		return mv;
-	}
+			return mv;
+		}
 
 	@RequestMapping("/customer/{customerInfo.name}")
 	public ModelAndView customer(

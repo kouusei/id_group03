@@ -84,6 +84,9 @@
 	<input type="submit" name="Register" value="登録"> <input type="reset" value="リセット">
 </p>
 <form action="/calender" method="post">
+	<input type="hidden" name="YEAR" th:value="${sche.year}">
+	<input type="hidden" name="MONTH" th:value="${sche.month}">
+	<input type="hidden" name="DATE" th:value="${sche.date}">
 	<input type="submit" value="カレンダーに戻る">
 </form>
 </div>

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
+@Table(name="schedule")
 public class Schedule {
 	//フィールド
 		@Id
@@ -16,14 +16,11 @@ public class Schedule {
 		@Column(name="code")
 		private int code;
 
-		@Column(name="name")
-		private String name;
+		@Column(name="category_code")
+		private int category_code;
 
-		@Column(name="email")
-		private String email;
-
-		@Column(name="password")
-		private String password;
+		@Column(name="scheduledate")
+		private String scheduledate;
 
 		@Column(name="starttime")
 		private String starttime;
@@ -41,21 +38,21 @@ public class Schedule {
 
 		}
 
-		public Schedule(String starttime, String endtime, String schedule, String schedulememo) {
+		public Schedule( int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
 
+			this.category_code=category_code;
+			this.scheduledate=scheduledate;
 			this.starttime = starttime;
 			this.endtime = endtime;
 			this.schedule = schedule;
 			this.schedulememo = schedulememo;
 		}
 
-		public Schedule(int code, String name, String email, String password, String starttime, String endtime,
-				String schedule, String schedulememo) {
+		public Schedule(int code, int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
 
 			this.code = code;
-			this.name = name;
-			this.email = email;
-			this.password = password;
+			this.category_code=category_code;
+			this.scheduledate=scheduledate;
 			this.starttime = starttime;
 			this.endtime = endtime;
 			this.schedule = schedule;
@@ -70,28 +67,20 @@ public class Schedule {
 			this.code = code;
 		}
 
-		public String getName() {
-			return name;
+		public int getCategory_code() {
+			return category_code;
 		}
 
-		public void setName(String name) {
-			this.name = name;
+		public void setCategory_code(int category_code) {
+			this.category_code = category_code;
 		}
 
-		public String getEmail() {
-			return email;
+		public String getScheduledate() {
+			return scheduledate;
 		}
 
-		public void setEmail(String email) {
-			this.email = email;
-		}
-
-		public String getPassword() {
-			return password;
-		}
-
-		public void setPassword(String password) {
-			this.password = password;
+		public void setScheduledate(String scheduledate) {
+			this.scheduledate = scheduledate;
 		}
 
 		public String getStarttime() {
@@ -125,6 +114,7 @@ public class Schedule {
 		public void setSchedulememo(String schedulememo) {
 			this.schedulememo = schedulememo;
 		}
+
 
 
 }
