@@ -8,13 +8,84 @@
 <body>
 <h1>スケジュール登録</h1>
 <span th:text="${sche.year}"></span>年<span th:text="${sche.month}"></span>月<span th:text="${sche.date}"></span>日
+
+<div id="contents">
+<div id="left">
 <table class="sche" border="1">
 	<tr><td class="top" style="width:80px">時刻</td><td class="top" style="width:300px">予定</td></tr>
-	<tr th:each="i : ${#numbers.sequence(0, 24)}" th:value="${i}">
+	<tr th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}">
 		<td class="time" th:text="${i}+':00'"></td><td class="contents"></td>
-		<tr><td class="timeb"></td><td class="contentsb"></td></tr>
 	</tr>
 
 </table>
+</div>
+<div id="right">
+<table>
+	<tr>
+		<td >日付</td>
+		<td>
+			<select name="YEAR">
+				<option th:each="i : ${#numbers.sequence(2021, 2025)}" th:value="${i}" th:text="${i}+ '年'">
+			</select>
+			<select name="MONTH">
+				<option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i}+ '月'">
+			</select>
+			<select name="DAY">
+				<option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i}+ '日'">
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<!-- スケジュールの時間を指定する -->
+		<td>時刻</td>
+		<td>
+			<!-- 開始時間の指定 -->
+			<select name="SHOUR">
+				<option value="">--時
+				<option th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}" th:text="${i}+ '時'">
+			</select>
+			<select name="SMINUTE">
+				<option value="0">00分
+				<option value="15">15分
+				<option value="30">30分
+				<option value="45">45分
+				<option value="60">60分
+			</select>
+			～
+			<!-- 終了時間の指定 -->
+			<select name="EHOUR">
+				<option value="">--時
+				<option th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}" th:text="${i}+ '時'">
+			</select>
+			<select name="EMINUTE">
+				<option value="0">00分
+				<option value="15">15分
+				<option value="30">30分
+				<option value="45">45分
+				<option value="60">60分
+			</select>
+		</td>
+	</tr>
+	<tr>
+		<td>予定</td>
+		<td>
+			<input type="text" name="PLAN" value="" size="30" maxlength="100">
+		</td>
+	</tr>
+	<tr>
+		<td valign="top">詳細</td>
+		<td>
+			<textarea name="MEMO" cols="30" rows="10" wrap="virtual"></textarea>
+		</td>
+	</tr>
+</table>
+
+<p>
+	<input type="submit" name="Register" value="登録"> <input type="reset" value="リセット">
+</p>
+
+
+</div>
+</div>
 </body>
 </html>
