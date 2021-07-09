@@ -25,6 +25,12 @@ public class Account {
 	@Column(name="password")
 	private String password;
 
+	@Column(name="tel")
+	private String tel;
+
+	@Column(name="address")
+	private String address;
+
 	public Account() {
 
 	}
@@ -40,6 +46,16 @@ public class Account {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+	}
+
+	public Account(String name, String email, String password ,String tel, String address) {
+		this.code = code;
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.email = tel;
+		this.email = address;
+
 	}
 
 	public int getCode() {
@@ -74,5 +90,20 @@ public class Account {
 		this.password = password;
 	}
 
+	public String getTel() {
+		return tel;
+	}
+
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
 }
 

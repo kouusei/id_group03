@@ -88,12 +88,14 @@ public class AccountController {
 	public ModelAndView signup_error(
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
+			@RequestParam("tel") String tel,
+			@RequestParam("address") String address,
 			@RequestParam("password") String password,
 			@RequestParam("password2") String password2,
 			ModelAndView mv) {
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || password == "" || password2 == "") {
+		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "") {
 			mv.addObject("error", "未入力項目があります。");
 			mv.setViewName("signup");
 			return mv;
@@ -105,7 +107,7 @@ public class AccountController {
 
 		} else {
 			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(name, email, password);
+			Account account = new Account(name, email, password, tel, address);
 
 			accountRepository.saveAndFlush(account);
 			mv.addObject("error", "新規登録できました。");
