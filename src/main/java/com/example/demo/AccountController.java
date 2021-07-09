@@ -161,4 +161,13 @@ public class AccountController {
 		return mv;
 	}
 
+	@RequestMapping("/logout")
+	public ModelAndView logout(ModelAndView mv) {
+
+		session.invalidate();
+
+		mv.setViewName("login");
+		return mv;
+	}
+
 }
