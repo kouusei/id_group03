@@ -1,62 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
 <title>スケジュール</title>
+<link rel="stylesheet" th:href="@{/css/schedule.css}">
 </head>
 <body>
 <h1>スケジュール登録</h1>
 <span th:text="${sche.year}"></span>年<span th:text="${sche.month}"></span>月<span th:text="${sche.date}"></span>日
 <table class="sche" border="1">
-<tr><td class="top" style="width:80px">時刻</td><td class="top" style="width:300px">予定</td></tr>
-<tr><td class="time">00:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">01:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">02:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">03:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">04:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">05:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">06:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">07:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">08:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">09:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">10:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">11:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">12:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">13:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">14:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">15:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">16:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">17:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">18:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">19:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">20:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">21:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">22:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-<tr><td class="time">23:00</td><td class="contents"></td></tr>
-<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="top" style="width:80px">時刻</td><td class="top" style="width:300px">予定</td></tr>
+	<tr th:each="i : ${#numbers.sequence(0, 24)}" th:value="${i}">
+		<td class="time" th:text="${i}+':00'"></td><td class="contents"></td>
+		<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	</tr>
 
 </table>
 </body>
