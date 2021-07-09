@@ -164,7 +164,7 @@
 	}
 </script>
 
-<span class="account"><a href="/customer" th:text="${session.customerInfo.name}"></a>さんがログイン中</span>
+<span class="account"><a th:href="'/customer/' + ${session.customerInfo.name}" th:text="${session.customerInfo.name}"></a>さんがログイン中</span>
 
 </body>
 </html>

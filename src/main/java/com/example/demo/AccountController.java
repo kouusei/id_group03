@@ -103,7 +103,7 @@ public class AccountController {
 			mv.setViewName("signup");
 			return mv;
 
-		} else{
+		} else {
 			//登録するAccountエンティティのインスタンスを生成
 			Account account = new Account(name, email, password);
 
@@ -118,19 +118,15 @@ public class AccountController {
 	//スケジュール画面へ遷移
 	@RequestMapping("/calender/{date}/{month}/{year}")
 	public ModelAndView calender(
-			@PathVariable(name="date") int date,
-			@PathVariable(name="month") int month,
-			@PathVariable(name="year") int year,
-//			@RequestParam("date") int date,
-//			@RequestParam("month") int month,
-//			@RequestParam("year") int year,
+			@PathVariable(name = "date") int date,
+			@PathVariable(name = "month") int month,
+			@PathVariable(name = "year") int year,
 			ModelAndView mv) {
 
 		//登録するDateのインスタンスを生成
 		Date sche = new Date(date, month, year);
-		//Date sche = new Date(date);
 
-		mv.addObject("sche",sche);
+		mv.addObject("sche", sche);
 		mv.setViewName("schedule");
 		return mv;
 	}
@@ -141,6 +137,18 @@ public class AccountController {
 
 		mv.setViewName("calender");
 
+		return mv;
+	}
+
+	@RequestMapping("/customer/{customerInfo.name}")
+	public ModelAndView customer(
+			@PathVariable(name="customerInfo.name")String name,
+			ModelAndView mv) {
+
+		Account accountList = accountRepository.findByName(name);
+		mv.addObject("account", accountList);
+
+		mv.setViewName("customer");
 		return mv;
 	}
 

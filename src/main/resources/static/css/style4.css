@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+h1 {
+	margin: 50px;
+	text-align: center;
+}
+
+table {
+	text-align: center;
+	width:340px;
+	height:140px;
+	margin: auto;
+}
+
+p {
+	text-align: center;
+}
