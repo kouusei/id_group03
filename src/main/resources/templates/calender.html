@@ -45,5 +45,7 @@
     </div>
 <script th:src="@{/js/calender.js}" type="text/javascript" charset="UTF-8"></script>
 
+<span th:if="${session.customerInfo.name != null}">(<a th:text="${session.customerInfo.name}"></a>さんがログイン中)</span><br>
+
 </body>
 </html>

@@ -35,7 +35,7 @@
 .date-picker.selected {
   font-weight: bold;
   color: #fff;
-  background: #cc0000;
+  background: rgb(255, 128, 64);
 }
 .date-picker.selected span {
   border-bottom: 2px solid currentColor;
