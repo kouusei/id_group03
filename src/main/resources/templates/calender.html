@@ -26,7 +26,7 @@
 		<!-- 年月を選択すると、選択した年と月のカレンダーが表示される -->
           <div class="footer-container-calendar">
               <label for="month">年月指定：</label>
-              <select id="month" onchange="jump()">
+              <select id="month" name="month" onchange="jump()">
                   <option value=0>1月</option>
                   <option value=1>2月</option>
                   <option value=2>3月</option>
@@ -40,12 +40,10 @@
                   <option value=10>11月</option>
                   <option value=11>12月</option>
               </select>
-              <select id="year" onchange="jump()"></select>
+              <select id="year" name="year" onchange="jump()"></select>
           </div>
     </div>
 <script th:src="@{/js/calender.js}" type="text/javascript" charset="UTF-8"></script>
-
-<span th:if="${session.customerInfo.name != null}">(<a th:text="${session.customerInfo.name}"></a>さんがログイン中)</span><br>
 
 </body>
 </html>

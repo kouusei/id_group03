@@ -134,4 +134,14 @@ public class AccountController {
 		mv.setViewName("schedule");
 		return mv;
 	}
+
+	//カレンダー画面へ戻る
+	@PostMapping("/calender")
+	public ModelAndView calender(ModelAndView mv) {
+
+		mv.setViewName("calender");
+
+		return mv;
+	}
+
 }
