@@ -21,6 +21,9 @@ public class AccountController {
 	@Autowired
 	AccountRepository accountRepository;
 
+	@Autowired
+	ScheduleRepository scheduleRepository;
+
 	//トップ画面
 	@RequestMapping("/")
 	public ModelAndView top(ModelAndView mv) {
@@ -134,12 +137,12 @@ public class AccountController {
 	}
 
 	//カレンダー画面へ戻る
-		@PostMapping("/calender")
-		public ModelAndView returncalender(
-				@RequestParam("DATE") int date,
-				@RequestParam("MONTH") int month,
-				@RequestParam("YEAR") int year,
-				ModelAndView mv) {
+	@PostMapping("/calender")
+	public ModelAndView returncalender(
+			@RequestParam("DATE") int date,
+			@RequestParam("MONTH") int month,
+			@RequestParam("YEAR") int year,
+			ModelAndView mv) {
 			//登録するDateのインスタンスを生成
 			Date cale = new Date(date, month, year);
 
@@ -159,6 +162,40 @@ public class AccountController {
 
 		mv.setViewName("customer");
 		return mv;
+	}
+
+	//スケジュールをカレンダーに追加
+	@PostMapping("/update")
+	public ModelAndView update(
+			@RequestParam("YEAR")  String year,
+			@RequestParam("MONTH")  String month,
+			@RequestParam("DAY")  String day,
+			@RequestParam("starthour") String starthour,
+			@RequestParam("startminute") String startminute,
+			@RequestParam("endhour") String endhour,
+			@RequestParam("endminute") String endminute,
+			@RequestParam("schedule") String schedule,
+			@RequestParam("schedulememo") String schedulememo,
+			ModelAndView mv) {
+
+			Account user=(Account)session.getAttribute("customerInfo");
+			int category_code=user.getCode();
+
+			String starttime=starthour+startminute;
+			String endtime=endhour+endminute;
+			String scheduledate=year+month+day;
+			String scheduledate2=year+month;
+
+			//登録するDateのインスタンスを生成
+			Schedule update = new Schedule(category_code,scheduledate,starttime, endtime, schedule,schedulememo);
+			scheduleRepository.saveAndFlush(update);
+
+			//scheduleテーブルから指定したレコードを取得
+			List<Schedule> record = scheduleRepository.findByScheduledateLike("%"+scheduledate2+"%");
+
+			mv.addObject("record", record);
+			mv.setViewName("calender");
+			return mv;
 	}
 
 	@RequestMapping("/logout")

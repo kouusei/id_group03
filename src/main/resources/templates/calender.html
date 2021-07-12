@@ -44,7 +44,7 @@
           </div>
     </div>
 
-<script>
+<script th:inline="javascript">
 	/*
 	カレンダー作成
 	*/
@@ -124,7 +124,7 @@
 
 	  // creating all cells（カレンダーを格納するセルの作成）
 	  var date = 1;
-
+	  var schedule=/*[[${record.schedule}]]*/"";
 	  for ( var i = 0; i < 6; i++ ) {
 	      var row = document.createElement("tr");
 
@@ -144,6 +144,7 @@
 
 	              //セルに日付を入れる
 	              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+ date +"</a>" + "</span>";
+	              cell.innerHTML = "<span>"+ schedule +"</span>";
 
 	              if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
 	                  cell.className = "date-picker selected";

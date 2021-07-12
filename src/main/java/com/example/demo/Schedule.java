@@ -38,6 +38,14 @@ public class Schedule {
 
 		}
 
+		public Schedule( String starttime, String endtime, String schedule, String schedulememo) {
+
+			this.starttime = starttime;
+			this.endtime = endtime;
+			this.schedule = schedule;
+			this.schedulememo = schedulememo;
+		}
+
 		public Schedule( int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
 
 			this.category_code=category_code;
