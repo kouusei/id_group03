@@ -3,6 +3,23 @@
 <head>
 <meta charset="UTF-8">
 <title>お客様情報</title>
+<script th:inline="javascript">
+/*<![CDATA[*/
+var Pass = window.prompt("パスワードを入力してください");
+
+if(Pass == ""){
+	window.alert("パスワードを入力してください。");
+	location.href = "http://localhost:8080/calender";
+
+}else if(Pass != /*[[${pass}]]*/){
+	window.alert("パスワードが一致しません。");
+	location.href = "http://localhost:8080/calender";
+
+}else if(Pass == /*[[${pass}]]*/){
+	window.alert("ログインに成功しました。");
+}
+/*]]>*/
+</script>
 </head>
 <link th:href="@{/css/style4.css}" rel="stylesheet" type="text/css">
 <body>

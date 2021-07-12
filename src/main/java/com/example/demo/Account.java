@@ -49,7 +49,6 @@ public class Account {
 	}
 
 	public Account(String name, String email, String password ,String tel, String address) {
-		this.code = code;
 		this.name = name;
 		this.email = email;
 		this.password = password;

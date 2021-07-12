@@ -143,33 +143,47 @@ public class AccountController {
 			@RequestParam("MONTH") int month,
 			@RequestParam("YEAR") int year,
 			ModelAndView mv) {
-			//登録するDateのインスタンスを生成
-			Date cale = new Date(date, month, year);
+		//登録するDateのインスタンスを生成
+		Date cale = new Date(date, month, year);
 
-			mv.addObject("cale",cale);
-			mv.setViewName("calender");
+		mv.addObject("cale", cale);
+		mv.setViewName("calender");
 
-			return mv;
-		}
+		return mv;
+	}
 
 	@RequestMapping("/customer/{customerInfo.name}")
 	public ModelAndView customer(
-			@PathVariable(name="customerInfo.name")String name,
+			@PathVariable(name = "customerInfo.name") String name,
 			ModelAndView mv) {
 
+		Account user = (Account) session.getAttribute("customerInfo");
+		String password = user.getPassword();
+
 		Account accountList = accountRepository.findByName(name);
+
 		mv.addObject("account", accountList);
+		mv.addObject("pass", password);
 
 		mv.setViewName("customer");
+
+		return mv;
+	}
+
+	@RequestMapping("/calender")
+	public ModelAndView customer(ModelAndView mv) {
+
+		mv.setViewName("calender");
+
 		return mv;
 	}
 
 	//スケジュールをカレンダーに追加
 	@PostMapping("/update")
 	public ModelAndView update(
-			@RequestParam("YEAR")  String year,
-			@RequestParam("MONTH")  String month,
-			@RequestParam("DAY")  String day,
+			@RequestParam("YEAR") String year,
+			@RequestParam("MONTH") String month,
+			@RequestParam("DAY") String day,
 			@RequestParam("starthour") String starthour,
 			@RequestParam("startminute") String startminute,
 			@RequestParam("endhour") String endhour,
@@ -178,24 +192,24 @@ public class AccountController {
 			@RequestParam("schedulememo") String schedulememo,
 			ModelAndView mv) {
 
-			Account user=(Account)session.getAttribute("customerInfo");
-			int category_code=user.getCode();
+		Account user = (Account) session.getAttribute("customerInfo");
+		int category_code = user.getCode();
 
-			String starttime=starthour+startminute;
-			String endtime=endhour+endminute;
-			String scheduledate=year+month+day;
-			String scheduledate2=year+month;
+		String starttime = starthour + startminute;
+		String endtime = endhour + endminute;
+		String scheduledate = year + month + day;
+		String scheduledate2 = year + month;
 
-			//登録するDateのインスタンスを生成
-			Schedule update = new Schedule(category_code,scheduledate,starttime, endtime, schedule,schedulememo);
-			scheduleRepository.saveAndFlush(update);
+		//登録するDateのインスタンスを生成
+		Schedule update = new Schedule(category_code, scheduledate, starttime, endtime, schedule, schedulememo);
+		scheduleRepository.saveAndFlush(update);
 
-			//scheduleテーブルから指定したレコードを取得
-			List<Schedule> record = scheduleRepository.findByScheduledateLike("%"+scheduledate2+"%");
+		//scheduleテーブルから指定したレコードを取得
+		List<Schedule> record = scheduleRepository.findByScheduledateLike("%" + scheduledate2 + "%");
 
-			mv.addObject("record", record);
-			mv.setViewName("calender");
-			return mv;
+		mv.addObject("record", record);
+		mv.setViewName("calender");
+		return mv;
 	}
 
 	@RequestMapping("/logout")
