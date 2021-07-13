@@ -35,11 +35,13 @@ public class Account {
 
 	}
 
-	public Account(int code, String name, String email, String password) {
+	public Account(int code, String name, String email, String password ,String tel, String address) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.tel = tel;
+		this.address = address;
 	}
 
 	public Account(String name, String email, String password) {
@@ -52,8 +54,8 @@ public class Account {
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.email = tel;
-		this.email = address;
+		this.tel = tel;
+		this.address = address;
 	}
 
 	public int getCode() {

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <title>お客様情報</title>
-<script th:inline="javascript">
+<script th:inline="javascript" th:if="${session.customerInfo2 == null}">
 /*<![CDATA[*/
 var Pass = window.prompt("パスワードを入力してください");
 
@@ -48,13 +48,15 @@ if(Pass == ""){
 	</table>
 	<br>
 	<form action="/edit" method="post">
-		<p><input type="submit" class="edit" value="更新"></p>
+		<p><input type="submit" class="edit" value="変更"></p>
+		<input type="hidden" name="code" th:value="${account.code}">
 		<input type="hidden" name="name" th:value="${account.name}">
 		<input type="hidden" name="email" th:value="${account.email}">
 		<input type="hidden" name="password" th:value="${account.password}">
 		<input type="hidden" name="tel" th:value="${account.tel}">
 		<input type="hidden" name="address" th:value="${account.address}">
 	</form>
+	<p><a href="/calender">カレンダーに戻る</a></p>
 	<p><a href="/logout">ログアウト</a></p>
 </body>
 </html>

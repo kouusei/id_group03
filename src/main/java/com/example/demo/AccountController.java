@@ -157,13 +157,14 @@ public class AccountController {
 		return mv;
 	}
 
+	//お客様情報に遷移
 	@RequestMapping("/customer/{customerInfo.name}")
 	public ModelAndView customer(
 			@PathVariable(name = "customerInfo.name") String name,
 			ModelAndView mv) {
 
-		Account user = (Account) session.getAttribute("customerInfo");
-		String password = user.getPassword();
+		Account account = (Account) session.getAttribute("customerInfo");
+		String password = account.getPassword();
 
 		Account accountList = accountRepository.findByName(name);
 
@@ -175,9 +176,12 @@ public class AccountController {
 		return mv;
 	}
 
+	//お客様情報からカレンダーに戻る
 	@RequestMapping("/calender")
 	public ModelAndView customer(ModelAndView mv) {
-		mv.addObject("AAA", 1);
+
+		Account acc = (Account) session.getAttribute("customerInfo");
+		session.setAttribute("customerInfo2", acc);
 		mv.setViewName("calender");
 
 		return mv;
@@ -197,8 +201,8 @@ public class AccountController {
 			@RequestParam("schedulememo") String schedulememo,
 			ModelAndView mv) {
 
-		Account user = (Account) session.getAttribute("customerInfo");
-		int category_code = user.getCode();
+		Account account = (Account) session.getAttribute("customerInfo");
+		int category_code = account.getCode();
 
 		int starttime = starthour + startminute;
 		int endtime = endhour + endminute;
@@ -217,6 +221,7 @@ public class AccountController {
 		return mv;
 	}
 
+	//ログアウト処理
 	@RequestMapping("/logout")
 	public ModelAndView logout(ModelAndView mv) {
 
@@ -224,6 +229,69 @@ public class AccountController {
 
 		mv.setViewName("login");
 		return mv;
+	}
+
+	//お客様情報変更画面遷移
+	@PostMapping("/edit")
+	public ModelAndView customer_edit(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("tel") String tel,
+			@RequestParam("address") String address,
+			ModelAndView mv) {
+
+		//Thymeleafで表示する準備
+		mv.addObject("code", code);
+		mv.addObject("name", name);
+		mv.addObject("email", email);
+		mv.addObject("password", password);
+		mv.addObject("tel", tel);
+		mv.addObject("address", address);
+
+		mv.setViewName("edit");
+		return mv;
+
+	}
+
+	//お客様情報変更後戻る
+	@PostMapping("/customer")
+	public ModelAndView edit(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("tel") String tel,
+			@RequestParam("address") String address,
+			@RequestParam("password") String password,
+			@RequestParam("password2") String password2,
+			ModelAndView mv) {
+
+		//未入力、パスワードが違えばエラー表示
+		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "") {
+			mv.addObject("error", "未入力項目があります。");
+			mv.setViewName("edit");
+			return mv;
+
+		} else if (!password.equals(password2)) {
+			mv.addObject("error", "パスワードが一致していません");
+			mv.setViewName("edit");
+			return mv;
+
+		} else {
+			Account acc = (Account) session.getAttribute("customerInfo");
+			session.setAttribute("customerInfo2", acc);
+
+			//登録するAccountエンティティのインスタンスを生成
+			Account account = new Account(code, name, email, password, tel, address);
+			accountRepository.saveAndFlush(account);
+
+			mv.addObject("account", account);
+			mv.addObject("error", "変更が完了しました。");
+			mv.setViewName("customer");
+			return mv;
+
+		}
 	}
 
 }

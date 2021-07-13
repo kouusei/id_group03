@@ -7,12 +7,12 @@
 <link th:href="@{/css/style5.css}" rel="stylesheet" type="text/css">
 <body>
 	<h1>お客様情報 変更</h1>
-
 	<form action="/customer" method="post">
-		<div th:text="${error}" style="color: red;"></div>
+		<p><span th:text="${error}" style="color: red;"></span></p>
 		<br>
 		<table border="1">
 			<tr>
+				<input type="hidden" name="code" th:value="${code}">
 				<th>名前</th>
 				<td><input type="text" name="name" th:value="${name}"></td>
 			</tr>
@@ -37,6 +37,7 @@
 				<td><input type="text" name="address" th:value="${address}"></td>
 			</tr>
 		</table>
+		<br>
 		<p>
 			<input type="submit" class="btn btn-border" value="更新">
 		</p>
