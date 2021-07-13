@@ -54,7 +54,6 @@ public class Account {
 		this.password = password;
 		this.email = tel;
 		this.email = address;
-
 	}
 
 	public int getCode() {
@@ -104,5 +103,6 @@ public class Account {
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 }
 

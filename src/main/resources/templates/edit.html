@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>お客様情報 変更</title>
+</head>
+<link th:href="@{/css/style5.css}" rel="stylesheet" type="text/css">
+<body>
+	<h1>お客様情報 変更</h1>
+
+	<form action="/customer" method="post">
+		<div th:text="${error}" style="color: red;"></div>
+		<br>
+		<table border="1">
+			<tr>
+				<th>名前</th>
+				<td><input type="text" name="name" th:value="${name}"></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><input type="email" name="email" th:value="${email}"></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type="password" name="password" th:value="${password}"></td>
+			</tr>
+			<tr>
+				<th>パスワード確認</th>
+				<td><input type="password" name="password2" th:value="${password2}"></td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td><input type="text" name="tel" th:value="${tel}"></td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td><input type="text" name="address" th:value="${address}"></td>
+			</tr>
+		</table>
+		<p>
+			<input type="submit" class="btn btn-border" value="更新">
+		</p>
+	</form>
+</body>
+</html>

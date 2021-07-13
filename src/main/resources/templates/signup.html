@@ -2,28 +2,49 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title >新規登録</title>
+<title>新規登録</title>
 </head>
 <link th:href="@{/css/style3.css}" rel="stylesheet" type="text/css">
 <body>
-<h1>新規登録</h1>
-<form action="/signup" method="post">
-	<div th:text="${error}" style="color: red;" ></div>
+	<h1>新規登録</h1>
+	<form action="/signup" method="post">
+		<div th:text="${error}" style="color: red;"></div>
+		<br>
+		<table border="1">
+			<tr>
+				<th>名前</th>
+				<td><input type="text" name="name"></td>
+			</tr>
+			<tr>
+				<th>メールアドレス</th>
+				<td><input type="email" name="email"></td>
+			</tr>
+			<tr>
+				<th>パスワード</th>
+				<td><input type="password" name="password"></td>
+			</tr>
+			<tr>
+				<th>パスワード確認</th>
+				<td><input type="password" name="password2"></td>
+			</tr>
+			<tr>
+				<th>電話番号</th>
+				<td><input type="text" name="tel"></td>
+			</tr>
+			<tr>
+				<th>住所</th>
+				<td><input type="text" name="address"></td>
+			</tr>
+
+		</table>
+		<br>
+		<p>
+			<input type="submit" class="btn btn-border" value="登録">
+		</p>
+	</form>
 	<br>
-	<table border="1">
-		<tr><th>名前</th><td><input type="text" name="name"></td></tr>
-		<tr><th>メールアドレス</th><td><input type="email" name="email"></td></tr>
-		<tr><th>電話番号</th><td><input type="text" name="tel"></td></tr>
-		<tr><th>住所</th><td><input type="text" name="address"></td></tr>
-		<tr><th>パスワード</th><td><input type="password" name="password"></td></tr>
-		<tr><th>パスワード確認</th><td><input type="password" name="password2"></td></tr>
-	</table>
-	<br>
-	<p><input type="submit" class="btn btn-border" value="登録"></p>
-</form>
-<br>
-<div class="login">
-<a href="/login">ログイン</a>はこちら
-</div>
+	<div class="login">
+		<a href="/login">ログイン</a>はこちら
+	</div>
 </body>
 </html>

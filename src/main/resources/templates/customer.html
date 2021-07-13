@@ -11,12 +11,12 @@ if(Pass == ""){
 	window.alert("パスワードを入力してください。");
 	location.href = "http://localhost:8080/calender";
 
-}else if(Pass != /*[[${pass}]]*/){
+}else if(Pass != [[${pass}]]){
 	window.alert("パスワードが一致しません。");
 	location.href = "http://localhost:8080/calender";
 
-}else if(Pass == /*[[${pass}]]*/){
-	window.alert("ログインに成功しました。");
+}else if(Pass == [[${pass}]]){
+	window.alert("パスワードが一致しました。");
 }
 /*]]>*/
 </script>
@@ -47,6 +47,14 @@ if(Pass == ""){
 		</tr>
 	</table>
 	<br>
+	<form action="/edit" method="post">
+		<p><input type="submit" class="edit" value="更新"></p>
+		<input type="hidden" name="name" th:value="${account.name}">
+		<input type="hidden" name="email" th:value="${account.email}">
+		<input type="hidden" name="password" th:value="${account.password}">
+		<input type="hidden" name="tel" th:value="${account.tel}">
+		<input type="hidden" name="address" th:value="${account.address}">
+	</form>
 	<p><a href="/logout">ログアウト</a></p>
 </body>
 </html>
