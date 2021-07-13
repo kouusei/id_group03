@@ -68,6 +68,10 @@ public class AccountController {
 			}
 
 			Account customerInfo = record.get(0);
+			//List<Schedule> record2 = scheduleRepository.findByScheduledateLike("%" +2021+ "%");
+			List<Account> record2 = accountRepository.findAll();
+			mv.addObject("AAA", 1);
+			mv.addObject("record", record2);
 
 			// セッションスコープにログイン名とカテゴリ情報を格納する
 			session.setAttribute("customerInfo", customerInfo);
@@ -147,6 +151,7 @@ public class AccountController {
 		Date cale = new Date(date, month, year);
 
 		mv.addObject("cale", cale);
+		mv.addObject("AAA", 1);
 		mv.setViewName("calender");
 
 		return mv;
@@ -172,22 +177,22 @@ public class AccountController {
 
 	@RequestMapping("/calender")
 	public ModelAndView customer(ModelAndView mv) {
-
+		mv.addObject("AAA", 1);
 		mv.setViewName("calender");
 
 		return mv;
 	}
 
-	//スケジュールをカレンダーに追加
+	//スケジュールを追加
 	@PostMapping("/update")
 	public ModelAndView update(
 			@RequestParam("YEAR") String year,
 			@RequestParam("MONTH") String month,
 			@RequestParam("DAY") String day,
-			@RequestParam("starthour") String starthour,
-			@RequestParam("startminute") String startminute,
-			@RequestParam("endhour") String endhour,
-			@RequestParam("endminute") String endminute,
+			@RequestParam("starthour") int starthour,
+			@RequestParam("startminute") int startminute,
+			@RequestParam("endhour") int endhour,
+			@RequestParam("endminute") int endminute,
 			@RequestParam("schedule") String schedule,
 			@RequestParam("schedulememo") String schedulememo,
 			ModelAndView mv) {
@@ -195,8 +200,8 @@ public class AccountController {
 		Account user = (Account) session.getAttribute("customerInfo");
 		int category_code = user.getCode();
 
-		String starttime = starthour + startminute;
-		String endtime = endhour + endminute;
+		int starttime = starthour + startminute;
+		int endtime = endhour + endminute;
 		String scheduledate = year + month + day;
 		String scheduledate2 = year + month;
 
@@ -206,9 +211,9 @@ public class AccountController {
 
 		//scheduleテーブルから指定したレコードを取得
 		List<Schedule> record = scheduleRepository.findByScheduledateLike("%" + scheduledate2 + "%");
-
+		mv.addObject("AAA", 1);
 		mv.addObject("record", record);
-		mv.setViewName("calender");
+		mv.setViewName("schedule");
 		return mv;
 	}
 

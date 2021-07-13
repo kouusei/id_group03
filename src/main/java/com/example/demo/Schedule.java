@@ -23,10 +23,10 @@ public class Schedule {
 		private String scheduledate;
 
 		@Column(name="starttime")
-		private String starttime;
+		private int starttime;
 
 		@Column(name="endtime")
-		private String endtime;
+		private int endtime;
 
 		@Column(name="schedule")
 		private String schedule;
@@ -38,7 +38,7 @@ public class Schedule {
 
 		}
 
-		public Schedule( String starttime, String endtime, String schedule, String schedulememo) {
+		public Schedule( int starttime, int endtime, String schedule, String schedulememo) {
 
 			this.starttime = starttime;
 			this.endtime = endtime;
@@ -46,7 +46,7 @@ public class Schedule {
 			this.schedulememo = schedulememo;
 		}
 
-		public Schedule( int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
+		public Schedule( int category_code, String scheduledate, int starttime, int endtime, String schedule, String schedulememo) {
 
 			this.category_code=category_code;
 			this.scheduledate=scheduledate;
@@ -56,7 +56,7 @@ public class Schedule {
 			this.schedulememo = schedulememo;
 		}
 
-		public Schedule(int code, int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
+		public Schedule(int code, int category_code, String scheduledate, int starttime, int endtime, String schedule, String schedulememo) {
 
 			this.code = code;
 			this.category_code=category_code;
@@ -91,19 +91,19 @@ public class Schedule {
 			this.scheduledate = scheduledate;
 		}
 
-		public String getStarttime() {
+		public int getStarttime() {
 			return starttime;
 		}
 
-		public void setStarttime(String starttime) {
+		public void setStarttime(int starttime) {
 			this.starttime = starttime;
 		}
 
-		public String getEndtime() {
+		public int getEndtime() {
 			return endtime;
 		}
 
-		public void setEndtime(String endtime) {
+		public void setEndtime(int endtime) {
 			this.endtime = endtime;
 		}
 

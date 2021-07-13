@@ -48,7 +48,7 @@
 	/*
 	カレンダー作成
 	*/
-
+	/*<![CDATA[*/
 	//カレンダーの年範囲を作成
 	function generate_year_range(start, end) {
 	  var years = "";
@@ -124,7 +124,11 @@
 
 	  // creating all cells（カレンダーを格納するセルの作成）
 	  var date = 1;
-	  var schedule=/*[[${record.schedule}]]*/"";
+	  var sche = /*[[${AAA}]]*/;
+
+	  //javaのlistをjavascriptの配列にセット
+	  var hoge = /*[[${record}]]*/;
+
 	  for ( var i = 0; i < 6; i++ ) {
 	      var row = document.createElement("tr");
 
@@ -141,10 +145,10 @@
 	              cell = document.createElement("td");
 
 	              cell.className = "date-picker";
-
+				  //if(record.scheduledate==){
 	              //セルに日付を入れる
-	              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+ date +"</a>" + "</span>";
-	              cell.innerHTML = "<span>"+ schedule +"</span>";
+	              cell.innerHTML = "<span>"+date+"</span>"+"<br>"+"<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+ "★" +"</a>" + "</span>";
+
 
 	              if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
 	                  cell.className = "date-picker selected";
@@ -163,6 +167,7 @@
 	function daysInMonth(iMonth, iYear) {
 	  return 32 - new Date(iYear, iMonth, 32).getDate();
 	}
+	/*]]>*/
 </script>
 
 <span class="account"><a th:href="'/customer/' + ${session.customerInfo.name}" th:text="${session.customerInfo.name}"></a>さんがログイン中</span>
