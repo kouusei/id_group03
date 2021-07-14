@@ -1,20 +1,26 @@
 package com.example.demo;
 
-public class Date {
+public class MyDate {
 	private int date;
 	private int month;
 	private int year;
 
-	public Date() {
+	public MyDate() {
 
 	}
 
-	public Date(int date) {
+	public MyDate(int date) {
 
 		this.date = date;
 	}
 
-	public Date(int date, int month, int year) {
+	public MyDate( int month, int year) {
+
+		this.month = month;
+		this.year = year;
+	}
+
+	public MyDate(int date, int month, int year) {
 
 		this.date = date;
 		this.month = month;

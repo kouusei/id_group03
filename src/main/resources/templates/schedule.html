@@ -13,12 +13,77 @@
 <div id="contents">
 <div id="left">
 <table class="sche" border="1">
-	<tr><td class="top" style="width:80px">時刻</td><td class="top" style="width:300px">予定</td></tr>
-	<tr th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}">
-		<td class="time" th:text="${i}+':00'"></td><td class="contents" ></td>
-	</tr>
-
+	<tr><td class="top" width="80px">時刻</td><td class="top" width="300px">予定</td></tr>
+	<tr><td class="time">01:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">02:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">03:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">04:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">05:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">06:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">07:00</td><td class="ex" rowspan="3"></td></tr>
+	<tr><td class="timeb"></td></tr>
+	<tr><td class="time">08:00</td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">09:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">10:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">11:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">12:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">13:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">14:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">15:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">16:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">17:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">18:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">19:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">20:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">21:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">22:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">23:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
+	<tr><td class="time">24:00</td><td class="contents"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
 </table>
+<h1>スケジュール</h1>
+	<table border="1" th:if="${session.records != null}">
+		<tr>
+			<th>開始時刻</th>
+			<td th:text="${records.starttime}"></td>
+		</tr>
+		<tr>
+			<th>終了時刻</th>
+			<td th:text="${records.endtime}"></td>
+		</tr>
+		<tr>
+			<th>予定</th>
+			<td th:text="${records.schedule}"></td>
+		</tr>
+		<tr>
+			<th>メモ</th>
+			<td th:text="${records.schedulememo}"></td>
+		</tr>
+
+	</table>
+	<br>
 </div>
 
 <!-- スケジュール作成 -->
@@ -49,7 +114,7 @@
 				<option th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}" th:text="${i}+ '時'">
 			</select>
 			<select name="startminute">
-				<option value="0">00分
+				<option value="00">00分
 				<option value="15">15分
 				<option value="30">30分
 				<option value="45">45分
@@ -62,7 +127,7 @@
 				<option th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}" th:text="${i}+ '時'">
 			</select>
 			<select name="endminute">
-				<option value="0">00分
+				<option value="00">00分
 				<option value="15">15分
 				<option value="30">30分
 				<option value="45">45分
@@ -92,6 +157,7 @@
 	<input type="reset" value="リセット">
 </p>
 </form>
+<span><a th:href="'/calender/'+ ${sche.month} +'/'+ ${sche.year} ">★</a></span>;
 <form action="/calender" method="post">
 	<input type="hidden" name="YEAR" th:value="${sche.year}">
 	<input type="hidden" name="MONTH" th:value="${sche.month}">

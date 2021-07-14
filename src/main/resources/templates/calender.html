@@ -27,20 +27,22 @@
           <div class="footer-container-calendar">
               <label for="month">年月指定：</label>
               <select id="month" name="month" onchange="jump()">
-                  <option value=0>1月</option>
-                  <option value=1>2月</option>
-                  <option value=2>3月</option>
-                  <option value=3>4月</option>
-                  <option value=4>5月</option>
-                  <option value=5>6月</option>
-                  <option value=6>7月</option>
-                  <option value=7>8月</option>
-                  <option value=8>9月</option>
-                  <option value=9>10月</option>
-                  <option value=10>11月</option>
-                  <option value=11>12月</option>
+                  <option value=0 >1月</option>
+                  <option value=1 >2月</option>
+                  <option value=2 >3月</option>
+                  <option value=3 >4月</option>
+                  <option value=4 >5月</option>
+                  <option value=5 >6月</option>
+                  <option value=6 >7月</option>
+                  <option value=7 >8月</option>
+                  <option value=8 >9月</option>
+                  <option value=9 >10月</option>
+                  <option value=10 >11月</option>
+                  <option value=11 >12月</option>
               </select>
-              <select id="year" name="year" onchange="jump()"></select>
+              <select id="year" name="year" onchange="jump()">
+
+              </select>
           </div>
     </div>
 
@@ -61,6 +63,7 @@
 	var today = new Date(); //日付
 	var currentMonth = today.getMonth(); //月
 	var currentYear = today.getFullYear(); //年
+
 	var selectYear = document.getElementById("year"); //年の選択
 	var selectMonth = document.getElementById("month"); //月の選択
 
@@ -87,6 +90,7 @@
 	//現在の（選択した）年月を表示
 	monthAndYear = document.getElementById("monthAndYear");
 	showCalendar(currentMonth, currentYear);
+	showCalendar2(currentMonth2, currentYear2);
 
 	//nextボタンを押すと、1か月後のカレンダーを表示
 	function next() {
@@ -108,7 +112,7 @@
 	  currentMonth = parseInt(selectMonth.value);
 	  showCalendar(currentMonth, currentYear);
 	}
-
+	 var hoge2 = /*[[${record}]]*/;
 	//カレンダーの本体部分の表示
 	function showCalendar(month, year) {
 
@@ -124,10 +128,7 @@
 
 	  // creating all cells（カレンダーを格納するセルの作成）
 	  var date = 1;
-	  var sche = /*[[${AAA}]]*/;
-
-	  //javaのlistをjavascriptの配列にセット
-	  var hoge = /*[[${record}]]*/;
+	  var comparison = "仕事";
 
 	  for ( var i = 0; i < 6; i++ ) {
 	      var row = document.createElement("tr");
@@ -143,18 +144,18 @@
 	          } else {
 	          	  //セル生成
 	              cell = document.createElement("td");
-
+	              cell.setAttribute("data-date", date);
+	              cell.setAttribute("data-month", month + 1);
+	              cell.setAttribute("data-year", year);
+	              cell.setAttribute("data-month_name", months[month]);
 	              cell.className = "date-picker";
-				  //if(record.scheduledate==){
-	              //セルに日付を入れる
-	              cell.innerHTML = "<span>"+date+"</span>"+"<br>"+"<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+ "★" +"</a>" + "</span>";
-
-
+	              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+date+"</a>" + "</span>";
 	              if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
 	                  cell.className = "date-picker selected";
 	              }
 	              row.appendChild(cell);
 	              date++;
+
 	          }
 	      }
 
@@ -162,6 +163,14 @@
 	  }
 
 	}
+
+	 //javaのlistをjavascriptの配列にセット
+	  var hoge = /*[[${records}]]*/;
+
+
+	  for(var i=0;i<hoge.length;i++){
+		  document.write(hoge[i].scheduledate);
+	  }
 
 	//1か月の日数を設定
 	function daysInMonth(iMonth, iYear) {

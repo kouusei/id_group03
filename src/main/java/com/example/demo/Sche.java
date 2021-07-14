@@ -1,8 +1,5 @@
 package com.example.demo;
 
-import java.sql.Date;
-import java.sql.Time;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="schedule")
-public class Schedule {
+@Table(name="sche")
+public class Sche {
 	//フィールド
 		@Id
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,13 +20,13 @@ public class Schedule {
 		private int category_code;
 
 		@Column(name="scheduledate")
-		private Date scheduledate;
+		private String scheduledate;
 
 		@Column(name="starttime")
-		private Time starttime;
+		private String starttime;
 
 		@Column(name="endtime")
-		private Time endtime;
+		private String endtime;
 
 		@Column(name="schedule")
 		private String schedule;
@@ -37,11 +34,11 @@ public class Schedule {
 		@Column(name="schedulememo")
 		private String schedulememo;
 
-		public Schedule() {
+		public Sche() {
 
 		}
 
-		public Schedule( int category_code, Date scheduledate, String schedule, String schedulememo) {
+		public Sche( int category_code, String scheduledate, String schedule, String schedulememo) {
 
 			this.category_code=category_code;
 			this.scheduledate=scheduledate;
@@ -49,7 +46,7 @@ public class Schedule {
 			this.schedulememo = schedulememo;
 		}
 
-		public Schedule( int category_code, Date scheduledate, Time starttime, Time endtime, String schedule, String schedulememo) {
+		public Sche( int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
 
 			this.category_code=category_code;
 			this.scheduledate=scheduledate;
@@ -59,7 +56,7 @@ public class Schedule {
 			this.schedulememo = schedulememo;
 		}
 
-		public Schedule(int code, int category_code, Date scheduledate, Time starttime, Time endtime, String schedule, String schedulememo) {
+		public Sche(int code, int category_code, String scheduledate, String starttime, String endtime, String schedule, String schedulememo) {
 
 			this.code = code;
 			this.category_code=category_code;
@@ -86,27 +83,27 @@ public class Schedule {
 			this.category_code = category_code;
 		}
 
-		public Date getScheduledate() {
+		public String getScheduledate() {
 			return scheduledate;
 		}
 
-		public void setScheduledate(Date scheduledate) {
+		public void setScheduledate(String scheduledate) {
 			this.scheduledate = scheduledate;
 		}
 
-		public Time getStarttime() {
+		public String getStarttime() {
 			return starttime;
 		}
 
-		public void setStarttime(Time starttime) {
+		public void setStarttime(String starttime) {
 			this.starttime = starttime;
 		}
 
-		public Time getEndtime() {
+		public String getEndtime() {
 			return endtime;
 		}
 
-		public void setEndtime(Time endtime) {
+		public void setEndtime(String endtime) {
 			this.endtime = endtime;
 		}
 
@@ -125,7 +122,6 @@ public class Schedule {
 		public void setSchedulememo(String schedulememo) {
 			this.schedulememo = schedulememo;
 		}
-
 
 
 }
