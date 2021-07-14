@@ -65,21 +65,12 @@
 </table>
 <h1>スケジュール</h1>
 	<table border="1" th:if="${session.records != null}">
-		<tr>
-			<th>開始時刻</th>
-			<td th:text="${records.starttime}"></td>
-		</tr>
-		<tr>
-			<th>終了時刻</th>
-			<td th:text="${records.endtime}"></td>
-		</tr>
-		<tr>
-			<th>予定</th>
-			<td th:text="${records.schedule}"></td>
-		</tr>
-		<tr>
-			<th>メモ</th>
-			<td th:text="${records.schedulememo}"></td>
+		<tr><th>開始時刻</th><th>終了時刻</th><th>予定</th><th>メモ</th></tr>
+		<tr th:each="list:${records}">
+			<td th:text="${list.starttime}"></td>
+			<td th:text="${list.endtime}"></td>
+			<td th:text="${list.schedule}"></td>
+			<td th:text="${list.schedulememo}"></td>
 		</tr>
 
 	</table>

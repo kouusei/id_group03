@@ -278,6 +278,7 @@ public class AccountController {
 				ModelAndView mv) {
 
 				Account account = (Account) session.getAttribute("customerInfo");
+				MyDate hizuke = (MyDate)session.getAttribute("sche");
 				int category_code = account.getCode();
 
 				String scheduledate = year + "/" + month + "/" + day;
@@ -287,10 +288,10 @@ public class AccountController {
 				Sche update = new Sche(category_code, scheduledate, starttime, endtime, schedule, schedulememo);
 				scheRepository.saveAndFlush(update);
 
-				//scheテーブルから指定したレコードを取得
-				List<Sche> records = scheRepository.findBySchedule(schedule);
+				//scheテーブルから指定したレコードを取得(全レコード取得)
+				List<Sche> records = scheRepository.findAll();
 				session.setAttribute("records", records);
-				mv.addObject("AAA", 1);
+				mv.addObject("sche", hizuke);
 				mv.addObject("records", records);
 				mv.setViewName("schedule");
 				return mv;
