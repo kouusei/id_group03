@@ -14,7 +14,7 @@
 <div id="left">
 <table class="sche" border="1">
 	<tr><td class="top" width="80px">時刻</td><td class="top" width="300px">予定</td></tr>
-	<tr><td class="time">01:00</td><td class="contents"></td></tr>
+	<tr><td class="time">01:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '1:00'}">a</span></td></tr>
 	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
 	<tr><td class="time">02:00</td><td class="contents"></td></tr>
 	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
@@ -30,7 +30,7 @@
 	<tr><td class="timeb"></td></tr>
 	<tr><td class="time">08:00</td></tr>
 	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
-	<tr><td class="time">09:00</td><td class="contents"></td></tr>
+	<tr><td class="time">09:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '9:00'}">a</span></td></tr>
 	<tr><td class="timeb"></td><td class="contentsb"></td></tr>
 	<tr><td class="time">10:00</td><td class="contents"></td></tr>
 	<tr><td class="timeb"></td><td class="contentsb"></td></tr>

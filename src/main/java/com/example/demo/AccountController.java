@@ -134,7 +134,10 @@ public class AccountController {
 			@PathVariable(name = "month") int month,
 			@PathVariable(name = "year") int year,
 			ModelAndView mv) {
-
+		List<Sche> records = scheRepository.findAll();
+		System.out.println(records);
+		System.out.println(records.size());
+		mv.addObject("records", records);
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
 		session.setAttribute("sche", sche);
