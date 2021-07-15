@@ -246,8 +246,17 @@ public class AccountController {
 		if (year == "" || month == "" || date == "" || starthour == "" || startminute == "" || endhour == ""
 				|| endminute == "" || schedule == "") {
 
-			mv.addObject("error", "未入力項目があります。");
+			String scheduledate = year + "/" + month + "/" + date;
+			String scheduledates = year + "/" + month ;
+
+			//scheテーブルから指定したレコードを取得(全レコード取得)
+			List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+			List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
+			session.setAttribute("records", records);
 			mv.addObject("sche", hizuke);
+			mv.addObject("records", records);
+			mv.addObject("recordz", recordz);
+			mv.addObject("error", "未入力項目があります。");
 			mv.setViewName("schedule");
 			return mv;
 		}
@@ -266,9 +275,6 @@ public class AccountController {
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
 		//List<Sche> records = scheRepository.findAll();
 		session.setAttribute("records", records);
-		mv.addObject("year", year);
-		mv.addObject("month", month);
-		mv.addObject("date", date);
 		mv.addObject("sche", hizuke);
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
