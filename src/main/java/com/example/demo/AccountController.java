@@ -131,6 +131,8 @@ public class AccountController {
 			@PathVariable(name = "year") String year,
 
 			ModelAndView mv) {
+		month = month.length() == 1 ? "0" + month : month;
+		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month ;
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
@@ -219,6 +221,8 @@ public class AccountController {
 		if (year == "" || month == "" || date == "" || starthour == "" || startminute == "" || endhour == ""
 				|| endminute == "" || schedule == "") {
 
+			month = month.length() == 1 ? "0" + month : month;
+			date = date.length() == 1 ? "0" + date : date;
 			String scheduledate = year + "/" + month + "/" + date;
 			String scheduledates = year + "/" + month ;
 
@@ -233,7 +237,8 @@ public class AccountController {
 			mv.setViewName("schedule");
 			return mv;
 		}
-
+		month = month.length() == 1 ? "0" + month : month;
+		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month ;
 		String starttime = starthour + ":" + startminute;
