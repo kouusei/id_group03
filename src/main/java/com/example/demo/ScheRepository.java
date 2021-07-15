@@ -7,4 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public interface ScheRepository extends JpaRepository<Sche, Integer>{
 	List<Sche> findByScheduledateLike(String scheduledate);
 	List<Sche> findBySchedule(String schedule);
+	List<Sche> findByScheduledate(String scheduledate);
 }
