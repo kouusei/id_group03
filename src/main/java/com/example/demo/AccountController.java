@@ -133,8 +133,12 @@ public class AccountController {
 			@PathVariable(name = "date") int date,
 			@PathVariable(name = "month") int month,
 			@PathVariable(name = "year") int year,
+
 			ModelAndView mv) {
-		List<Sche> records = scheRepository.findAll();
+		String scheduledate = year + "/" + month + "/" + date;
+		//Sche  list= (Sche) session.getAttribute("records");
+		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+		//List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
@@ -157,7 +161,6 @@ public class AccountController {
 		//mv.addObject("schedule",schedule);
 
 		mv.addObject("cale", cale);
-		mv.addObject("AAA", 1);
 		mv.setViewName("calender");
 
 		return mv;
@@ -222,56 +225,6 @@ public class AccountController {
 		return mv;
 	}
 
-	//	//スケジュールを追加
-	//	@PostMapping("/update")
-	//	public ModelAndView update(
-	//			@RequestParam("YEAR") String year,
-	//			@RequestParam("MONTH") String month,
-	//			@RequestParam("DAY") String day,
-	//			@RequestParam("starthour") String starthour,
-	//			@RequestParam("startminute") String startminute,
-	//			@RequestParam("endhour") String endhour,
-	//			@RequestParam("endminute") String endminute,
-	//			@RequestParam("schedule") String schedule,
-	//			@RequestParam("schedulememo") String schedulememo,
-	//			ModelAndView mv) {
-	//		Account account = (Account) session.getAttribute("customerInfo");
-	//		int category_code = account.getCode();
-	//		try {
-	//			int y = Integer.parseInt(year);
-	//			int m = Integer.parseInt(month);
-	//			int d = Integer.parseInt(day);
-	//			int _y = y-1900;
-	//			int _m = m-1;
-	////			String strDate = "2019/11/01";
-	////			SimpleDateFormat sdFormat = new SimpleDateFormat("yyyy/MM/dd");
-	//			@SuppressWarnings("deprecation")
-	//			Date scheduledate =  new Date(_y, _m, d);
-	//			System.out.println(scheduledate);
-	//			String stime = starthour + ":" + startminute;
-	//			String etime = endhour + ":" + endminute;
-	//			Time starttime = Time.valueOf("10:10");
-	//			Time endtime = Time.valueOf("11:10");
-	////			Time.valueOf("10:20");
-	//			//登録するDateのインスタンスを生成
-	//			Schedule update = new Schedule(category_code, scheduledate, starttime, endtime, schedule, schedulememo);
-	//			scheduleRepository.saveAndFlush(update);
-	//			//scheduleテーブルから指定したレコードを取得
-	//			List<Schedule> records = scheduleRepository.findBySchedule(schedule);
-	//			session.setAttribute("records", records);
-	//			mv.addObject("AAA", 1);
-	//			mv.addObject("records", records);
-	//			mv.setViewName("calender");
-	//			return mv;
-	//
-	//		} catch (Exception e) {
-	//            e.printStackTrace();
-	//            mv.setViewName("calender");
-	//            return mv;
-	//        }
-	//
-	//	}
-
 	//スケジュールを追加
 	@PostMapping("/update")
 	public ModelAndView update(
@@ -309,6 +262,7 @@ public class AccountController {
 
 		//scheテーブルから指定したレコードを取得(全レコード取得)
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+		//List<Sche> records = scheRepository.findAll();
 		session.setAttribute("records", records);
 		mv.addObject("year", year);
 		mv.addObject("month", month);
