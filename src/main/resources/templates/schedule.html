@@ -10,9 +10,10 @@
 <span th:text="${sche.year}"></span>年<span th:text="${sche.month}"></span>月<span th:text="${sche.date}"></span>日
 
 <!-- スケジュール表 -->
+
+<h2>スケジュール</h2>
 <div id="contents">
-<div id="left">
-<h1>スケジュール</h1>
+<div id="left" class="up">
 	<table class="sche" border="1" th:if="${recordz != null}">
 		<tr><th>日付</th><th>開始時刻</th><th>終了時刻</th><th>予定</th><th>メモ</th></tr>
 		<tr th:each="list:${recordz}">
@@ -27,7 +28,7 @@
 	<br>
 </div>
 
-<div id="middle">
+<div id="middle" class="up">
 <table class="schedule" border="1">
 	<caption>本日のスケジュール</caption>
 	<tr><td class="top" width="80px">時刻</td><td class="top" width="300px">予定</td></tr>
@@ -84,10 +85,10 @@
 </div>
 
 <!-- スケジュール作成 -->
-<div id="right">
+<div id="right" class="up">
 <form action="/update" method="post">
 <div th:text="${error}" style="color: red;"></div><br>
-<table>
+<table style="width:300px;">
 	<tr>
 		<td >日付</td>
 		<td>
@@ -149,7 +150,6 @@
 	<input type="reset" value="リセット">
 </p>
 </form>
-<span><a th:href="'/calender/'+ ${sche.month} +'/'+ ${sche.year} ">★</a></span>;
 <form action="/calender" method="post">
 	<input type="hidden" name="YEAR" th:value="${sche.year}">
 	<input type="hidden" name="MONTH" th:value="${sche.month}">

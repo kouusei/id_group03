@@ -12,10 +12,11 @@ table.schedule{
 	border-collapse:collapse;
 }
 
+
 td{
 	vertical-align:top;
 	margin:0px;
-	padding:2px;
+	padding:3px;
 	font-size:0.75em;
 	height:20px;
 }
@@ -68,25 +69,23 @@ p{
 }
 
 #left{
-	margin:0;
-	padding:0;
-	float:left;
-	width:400px;
+	margin:10px;
+	padding:10px;
+	left:50px;
+	width:450px;
 }
 
 #middle{
 	padding:0;
 	margin-left: auto;
   	margin-right: auto;
-	width:400px;
+	width:450px;
 }
 
 #right{
-	margin:0;
-	padding:0;
+	margin:auto;
+	padding:auto;
 	float:right;
-	top: 50px;
-	right: 100px;
 	width:300px;
 	background-color:#ffffff;
 }
@@ -96,4 +95,8 @@ p{
 	display:block;
 	height:0;clear:both;
 	visibility:hidden;
+}
+
+.up{
+	display: inline-flex;
 }
