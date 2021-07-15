@@ -237,6 +237,7 @@ public class AccountController {
 			mv.setViewName("schedule");
 			return mv;
 		}
+
 		month = month.length() == 1 ? "0" + month : month;
 		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
@@ -253,6 +254,9 @@ public class AccountController {
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
 		session.setAttribute("records", records);
 		mv.addObject("sche", hizuke);
+		mv.addObject("year", year);
+		mv.addObject("month", month);
+		mv.addObject("date", date);
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
 		mv.setViewName("schedule");
