@@ -68,7 +68,6 @@ public class AccountController {
 			}
 
 			Account customerInfo = record.get(0);
-			//List<Schedule> record2 = scheduleRepository.findByScheduledateLike("%" +2021+ "%");
 			List<Account> record2 = accountRepository.findAll();
 			mv.addObject("AAA", 1);
 			mv.addObject("record", record2);
@@ -134,10 +133,8 @@ public class AccountController {
 			ModelAndView mv) {
 		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month ;
-		//Sche  list= (Sche) session.getAttribute("records");
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
-		//List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
 		//登録するDateのインスタンスを生成
@@ -157,35 +154,11 @@ public class AccountController {
 			ModelAndView mv) {
 		//登録するDateのインスタンスを生成
 		MyDate cale = new MyDate(date, month, year);
-		//Schedule schedule = (Schedule) session.getAttribute("record2");
-		//mv.addObject("schedule",schedule);
-
 		mv.addObject("cale", cale);
 		mv.setViewName("calender");
 
 		return mv;
 	}
-
-//	//カレンダー画面へ戻る2
-//	@RequestMapping("/calender/{sche.month}/{sche.year}")
-//	public ModelAndView returncalender2(
-//			@PathVariable(name = "sche.month") int month,
-//			@PathVariable(name = "sche.year") int year,
-//			ModelAndView mv) {
-//
-//		//MyDate schedule = (MyDate) session.getAttribute("sche");
-//		//		int smonth = schedule.getMonth();
-//		//		int syear = schedule.getYear();
-//		//登録するDateのインスタンスを生成
-//		MyDate cales = new MyDate(month, year);
-//		//mv.addObject("schedule",schedule);
-//		mv.addObject("cales", cales);
-//		//		mv.addObject("smonth", smonth);
-//		//		mv.addObject("syear", syear);
-//		mv.setViewName("calender");
-//
-//		return mv;
-//	}
 
 	//お客様情報に遷移
 	@RequestMapping("/customer/{customerInfo.name}")
@@ -273,7 +246,6 @@ public class AccountController {
 		//scheテーブルから指定したレコードを取得(全レコード取得)
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
-		//List<Sche> records = scheRepository.findAll();
 		session.setAttribute("records", records);
 		mv.addObject("sche", hizuke);
 		mv.addObject("records", records);
