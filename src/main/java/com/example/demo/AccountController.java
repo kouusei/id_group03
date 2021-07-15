@@ -310,6 +310,9 @@ public class AccountController {
 		//scheテーブルから指定したレコードを取得(全レコード取得)
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		session.setAttribute("records", records);
+		mv.addObject("year", year);
+		mv.addObject("month", month);
+		mv.addObject("day", day);
 		mv.addObject("sche", hizuke);
 		mv.addObject("records", records);
 		mv.setViewName("schedule");
