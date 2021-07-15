@@ -139,7 +139,7 @@ public class AccountController {
 		String scheduledates = year + "/" + month ;
 		//Sche  list= (Sche) session.getAttribute("records");
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
-		List<Sche> recordz = scheRepository.findByScheduledateLike("%"+scheduledates+"%");
+		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
 		//List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
@@ -266,7 +266,7 @@ public class AccountController {
 
 		//scheテーブルから指定したレコードを取得(全レコード取得)
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
-		List<Sche> recordz = scheRepository.findByScheduledateLike("%"+scheduledates+"%");
+		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%"+scheduledates+"%");
 		//List<Sche> records = scheRepository.findAll();
 		session.setAttribute("records", records);
 		mv.addObject("year", year);

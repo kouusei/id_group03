@@ -14,8 +14,9 @@
 <div id="left">
 <h1>スケジュール</h1>
 	<table class="sche" border="1">
-		<tr><th>開始時刻</th><th>終了時刻</th><th>予定</th><th>メモ</th></tr>
+		<tr><th>日付</th><th>開始時刻</th><th>終了時刻</th><th>予定</th><th>メモ</th></tr>
 		<tr th:each="list:${recordz}">
+			<td th:text="${list.scheduledate}"></td>
 			<td th:text="${list.starttime}"></td>
 			<td th:text="${list.endtime}"></td>
 			<td th:text="${list.schedule}"></td>
