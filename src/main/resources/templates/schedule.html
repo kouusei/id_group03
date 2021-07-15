@@ -92,13 +92,13 @@
 		<td >日付</td>
 		<td>
 			<select name="YEAR">
-				<option th:each="i : ${#numbers.sequence(2021, 2025)}" th:value="${i}" th:text="${i}+ '年'">
+				<option th:value="${year}" th:text="${year}+ '年'">
 			</select>
 			<select name="MONTH">
-				<option th:each="i : ${#numbers.sequence(1, 12)}" th:value="${i}" th:text="${i}+ '月'">
+				<option th:value="${month}" th:text="${month}+ '月'">
 			</select>
 			<select name="DAY">
-				<option th:each="i : ${#numbers.sequence(1, 31)}" th:value="${i}" th:text="${i}+ '日'">
+				<option th:value="${date}" th:text="${date}+ '日'">
 			</select>
 		</td>
 	</tr>

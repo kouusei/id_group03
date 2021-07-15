@@ -22,9 +22,6 @@ public class AccountController {
 	AccountRepository accountRepository;
 
 	@Autowired
-	ScheduleRepository scheduleRepository;
-
-	@Autowired
 	ScheRepository scheRepository;
 
 	//トップ画面
@@ -130,9 +127,9 @@ public class AccountController {
 	//スケジュール画面へ遷移
 	@RequestMapping("/calender/{date}/{month}/{year}")
 	public ModelAndView calender(
-			@PathVariable(name = "date") int date,
-			@PathVariable(name = "month") int month,
-			@PathVariable(name = "year") int year,
+			@PathVariable(name = "date") String date,
+			@PathVariable(name = "month") String month,
+			@PathVariable(name = "year") String year,
 
 			ModelAndView mv) {
 		String scheduledate = year + "/" + month + "/" + date;
@@ -154,9 +151,9 @@ public class AccountController {
 	//カレンダー画面へ戻る
 	@PostMapping("/calender")
 	public ModelAndView returncalender(
-			@RequestParam("DATE") int date,
-			@RequestParam("MONTH") int month,
-			@RequestParam("YEAR") int year,
+			@RequestParam("DATE") String date,
+			@RequestParam("MONTH") String month,
+			@RequestParam("YEAR") String year,
 			ModelAndView mv) {
 		//登録するDateのインスタンスを生成
 		MyDate cale = new MyDate(date, month, year);
@@ -169,26 +166,26 @@ public class AccountController {
 		return mv;
 	}
 
-	//カレンダー画面へ戻る2
-	@RequestMapping("/calender/{sche.month}/{sche.year}")
-	public ModelAndView returncalender2(
-			@PathVariable(name = "sche.month") int month,
-			@PathVariable(name = "sche.year") int year,
-			ModelAndView mv) {
-
-		//MyDate schedule = (MyDate) session.getAttribute("sche");
-		//		int smonth = schedule.getMonth();
-		//		int syear = schedule.getYear();
-		//登録するDateのインスタンスを生成
-		MyDate cales = new MyDate(month, year);
-		//mv.addObject("schedule",schedule);
-		mv.addObject("cales", cales);
-		//		mv.addObject("smonth", smonth);
-		//		mv.addObject("syear", syear);
-		mv.setViewName("calender");
-
-		return mv;
-	}
+//	//カレンダー画面へ戻る2
+//	@RequestMapping("/calender/{sche.month}/{sche.year}")
+//	public ModelAndView returncalender2(
+//			@PathVariable(name = "sche.month") int month,
+//			@PathVariable(name = "sche.year") int year,
+//			ModelAndView mv) {
+//
+//		//MyDate schedule = (MyDate) session.getAttribute("sche");
+//		//		int smonth = schedule.getMonth();
+//		//		int syear = schedule.getYear();
+//		//登録するDateのインスタンスを生成
+//		MyDate cales = new MyDate(month, year);
+//		//mv.addObject("schedule",schedule);
+//		mv.addObject("cales", cales);
+//		//		mv.addObject("smonth", smonth);
+//		//		mv.addObject("syear", syear);
+//		mv.setViewName("calender");
+//
+//		return mv;
+//	}
 
 	//お客様情報に遷移
 	@RequestMapping("/customer/{customerInfo.name}")
@@ -233,7 +230,7 @@ public class AccountController {
 	public ModelAndView update(
 			@RequestParam("YEAR") String year,
 			@RequestParam("MONTH") String month,
-			@RequestParam("DAY") String day,
+			@RequestParam("DAY") String date,
 			@RequestParam("starthour") String starthour,
 			@RequestParam("startminute") String startminute,
 			@RequestParam("endhour") String endhour,
@@ -246,7 +243,7 @@ public class AccountController {
 		MyDate hizuke = (MyDate) session.getAttribute("sche");
 		int category_code = account.getCode();
 
-		if (year == "" || month == "" || day == "" || starthour == "" || startminute == "" || endhour == ""
+		if (year == "" || month == "" || date == "" || starthour == "" || startminute == "" || endhour == ""
 				|| endminute == "" || schedule == "") {
 
 			mv.addObject("error", "未入力項目があります。");
@@ -255,7 +252,7 @@ public class AccountController {
 			return mv;
 		}
 
-		String scheduledate = year + "/" + month + "/" + day;
+		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month ;
 		String starttime = starthour + ":" + startminute;
 		String endtime = endhour + ":" + endminute;
@@ -271,7 +268,7 @@ public class AccountController {
 		session.setAttribute("records", records);
 		mv.addObject("year", year);
 		mv.addObject("month", month);
-		mv.addObject("day", day);
+		mv.addObject("date", date);
 		mv.addObject("sche", hizuke);
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
