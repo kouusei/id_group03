@@ -136,10 +136,13 @@ public class AccountController {
 
 			ModelAndView mv) {
 		String scheduledate = year + "/" + month + "/" + date;
+		String scheduledates = year + "/" + month ;
 		//Sche  list= (Sche) session.getAttribute("records");
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+		List<Sche> recordz = scheRepository.findByScheduledateLike("%"+scheduledates+"%");
 		//List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
+		mv.addObject("recordz", recordz);
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
 		session.setAttribute("sche", sche);
@@ -253,6 +256,7 @@ public class AccountController {
 		}
 
 		String scheduledate = year + "/" + month + "/" + day;
+		String scheduledates = year + "/" + month ;
 		String starttime = starthour + ":" + startminute;
 		String endtime = endhour + ":" + endminute;
 
@@ -262,6 +266,7 @@ public class AccountController {
 
 		//scheテーブルから指定したレコードを取得(全レコード取得)
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+		List<Sche> recordz = scheRepository.findByScheduledateLike("%"+scheduledates+"%");
 		//List<Sche> records = scheRepository.findAll();
 		session.setAttribute("records", records);
 		mv.addObject("year", year);
@@ -269,6 +274,7 @@ public class AccountController {
 		mv.addObject("day", day);
 		mv.addObject("sche", hizuke);
 		mv.addObject("records", records);
+		mv.addObject("recordz", recordz);
 		mv.setViewName("schedule");
 		return mv;
 
