@@ -135,8 +135,6 @@ public class AccountController {
 			@PathVariable(name = "year") int year,
 			ModelAndView mv) {
 		List<Sche> records = scheRepository.findAll();
-		System.out.println(records);
-		System.out.println(records.size());
 		mv.addObject("records", records);
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
@@ -292,15 +290,25 @@ public class AccountController {
 		MyDate hizuke = (MyDate) session.getAttribute("sche");
 		int category_code = account.getCode();
 
+		if (year == "" || month == "" || day == "" || starthour == "" || startminute == "" || endhour == ""
+				|| endminute == "" || schedule == "") {
+
+			mv.addObject("error", "未入力項目があります。");
+			mv.addObject("sche", hizuke);
+			mv.setViewName("schedule");
+			return mv;
+		}
+
 		String scheduledate = year + "/" + month + "/" + day;
 		String starttime = starthour + ":" + startminute;
 		String endtime = endhour + ":" + endminute;
+
 		//登録するDateのインスタンスを生成
 		Sche update = new Sche(category_code, scheduledate, starttime, endtime, schedule, schedulememo);
 		scheRepository.saveAndFlush(update);
 
 		//scheテーブルから指定したレコードを取得(全レコード取得)
-		List<Sche> records = scheRepository.findAll();
+		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		session.setAttribute("records", records);
 		mv.addObject("sche", hizuke);
 		mv.addObject("records", records);
