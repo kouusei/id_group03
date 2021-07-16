@@ -3,23 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <title>お客様情報</title>
-<script th:inline="javascript" th:if="${session.customerInfo2 == null}">
-/*<![CDATA[*/
-var Pass = window.prompt("パスワードを入力してください");
-
-if(Pass == ""){
-	window.alert("パスワードを入力してください。");
-	location.href = "http://localhost:8080/calender";
-
-}else if(Pass != [[${pass}]]){
-	window.alert("パスワードが一致しません。");
-	location.href = "http://localhost:8080/calender";
-
-}else if(Pass == [[${pass}]]){
-	window.alert("パスワードが一致しました。");
-}
-/*]]>*/
-</script>
 </head>
 <link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
 <body>
@@ -33,10 +16,6 @@ if(Pass == ""){
 		<tr>
 			<th>メールアドレス</th>
 			<td th:text="${account.email}"></td>
-		</tr>
-		<tr>
-			<th>パスワード</th>
-			<td th:text="${account.password}"></td>
 		</tr>
 		<tr>
 			<th>電話番号</th>

@@ -190,25 +190,11 @@ public class AccountController {
 	@RequestMapping("/edit/calender")
 	public ModelAndView customer(ModelAndView mv) {
 
-		Account acc = (Account) session.getAttribute("customerInfo");
-		session.setAttribute("customerInfo2", acc);
-
 		List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
 
 		mv.setViewName("calender");
 
-		return mv;
-	}
-
-	//Promptタブでキャンセル・パスワード間違いをした時の遷移
-	@RequestMapping("/calender")
-	public ModelAndView cancel(ModelAndView mv) {
-
-		List<Sche> records = scheRepository.findAll();
-		mv.addObject("records", records);
-
-		mv.setViewName("calender");
 		return mv;
 	}
 
@@ -230,8 +216,8 @@ public class AccountController {
 		MyDate hizuke = (MyDate) session.getAttribute("sche");
 		int category_code = account.getCode();
 		int Start = Integer.parseInt(starthour);
-		int starT = Integer.parseInt(endhour);
-		int End = Integer.parseInt(startminute);
+		int End = Integer.parseInt(endhour);
+		int starT = Integer.parseInt(startminute);
 		int enD = Integer.parseInt(endminute);
 
 		if (year == "" || month == "" || date == "" || starthour == "" || startminute == "" || endhour == ""
@@ -257,7 +243,7 @@ public class AccountController {
 			mv.setViewName("schedule");
 			return mv;
 
-		} else if (Start + End > starT + enD) {
+		} else if (Start < End && starT < enD) {
 
 			month = month.length() == 1 ? "0" + month : month;
 			date = date.length() == 1 ? "0" + date : date;
