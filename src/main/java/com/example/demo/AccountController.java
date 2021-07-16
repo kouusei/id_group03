@@ -68,9 +68,8 @@ public class AccountController {
 			}
 
 			Account customerInfo = record.get(0);
-			List<Account> record2 = accountRepository.findAll();
-			mv.addObject("AAA", 1);
-			mv.addObject("record", record2);
+			List<Sche> records = scheRepository.findAll();
+			mv.addObject("records", records);
 
 			// セッションスコープにログイン名とカテゴリ情報を格納する
 			session.setAttribute("customerInfo", customerInfo);
@@ -135,10 +134,12 @@ public class AccountController {
 		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month;
+
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
+
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
 		session.setAttribute("sche", sche);
@@ -157,6 +158,10 @@ public class AccountController {
 		//登録するDateのインスタンスを生成
 		MyDate cale = new MyDate(date, month, year);
 		mv.addObject("cale", cale);
+
+		List<Sche> records = scheRepository.findAll();
+		mv.addObject("records", records);
+
 		mv.setViewName("calender");
 
 		return mv;
@@ -187,6 +192,10 @@ public class AccountController {
 
 		Account acc = (Account) session.getAttribute("customerInfo");
 		session.setAttribute("customerInfo2", acc);
+
+		List<Sche> records = scheRepository.findAll();
+		mv.addObject("records", records);
+
 		mv.setViewName("calender");
 
 		return mv;
@@ -195,6 +204,9 @@ public class AccountController {
 	//Promptタブでキャンセル・パスワード間違いをした時の遷移
 	@RequestMapping("/calender")
 	public ModelAndView cancel(ModelAndView mv) {
+
+		List<Sche> records = scheRepository.findAll();
+		mv.addObject("records", records);
 
 		mv.setViewName("calender");
 		return mv;
@@ -217,6 +229,10 @@ public class AccountController {
 		Account account = (Account) session.getAttribute("customerInfo");
 		MyDate hizuke = (MyDate) session.getAttribute("sche");
 		int category_code = account.getCode();
+		int Start = Integer.parseInt(starthour);
+		int starT = Integer.parseInt(endhour);
+		int End = Integer.parseInt(startminute);
+		int enD = Integer.parseInt(endminute);
 
 		if (year == "" || month == "" || date == "" || starthour == "" || startminute == "" || endhour == ""
 				|| endminute == "" || schedule == "") {
@@ -237,38 +253,65 @@ public class AccountController {
 			mv.addObject("month", month);
 			mv.addObject("date", date);
 			mv.addObject("error", "未入力項目があります。");
+
 			mv.setViewName("schedule");
 			return mv;
+
+		} else if (Start + End > starT + enD) {
+
+			month = month.length() == 1 ? "0" + month : month;
+			date = date.length() == 1 ? "0" + date : date;
+			String scheduledate = year + "/" + month + "/" + date;
+			String scheduledates = year + "/" + month;
+
+			//scheテーブルから指定したレコードを取得(全レコード取得)
+			List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+			List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
+			session.setAttribute("records", records);
+			mv.addObject("sche", hizuke);
+			mv.addObject("records", records);
+			mv.addObject("recordz", recordz);
+			mv.addObject("year", year);
+			mv.addObject("month", month);
+			mv.addObject("date", date);
+			mv.addObject("error", "時間設定が間違っています。");
+
+			mv.setViewName("schedule");
+			return mv;
+
+		} else {
+
+			month = month.length() == 1 ? "0" + month : month;
+			date = date.length() == 1 ? "0" + date : date;
+			String scheduledate = year + "/" + month + "/" + date;
+			String scheduledates = year + "/" + month;
+			String starttime = starthour + ":" + startminute;
+			String endtime = endhour + ":" + endminute;
+
+			//登録するDateのインスタンスを生成
+			Sche update = new Sche(category_code, scheduledate, starttime, endtime, schedule, schedulememo);
+			scheRepository.saveAndFlush(update);
+
+			//scheテーブルから指定したレコードを取得(全レコード取得)
+			List<Sche> records = scheRepository.findByScheduledate(scheduledate);
+			List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
+			session.setAttribute("records", records);
+			mv.addObject("sche", hizuke);
+			mv.addObject("year", year);
+			mv.addObject("month", month);
+			mv.addObject("date", date);
+			mv.addObject("records", records);
+			mv.addObject("recordz", recordz);
+
+			mv.setViewName("schedule");
+			return mv;
+
 		}
-
-		month = month.length() == 1 ? "0" + month : month;
-		date = date.length() == 1 ? "0" + date : date;
-		String scheduledate = year + "/" + month + "/" + date;
-		String scheduledates = year + "/" + month;
-		String starttime = starthour + ":" + startminute;
-		String endtime = endhour + ":" + endminute;
-
-		//登録するDateのインスタンスを生成
-		Sche update = new Sche(category_code, scheduledate, starttime, endtime, schedule, schedulememo);
-		scheRepository.saveAndFlush(update);
-
-		//scheテーブルから指定したレコードを取得(全レコード取得)
-		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
-		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
-		session.setAttribute("records", records);
-		mv.addObject("sche", hizuke);
-		mv.addObject("year", year);
-		mv.addObject("month", month);
-		mv.addObject("date", date);
-		mv.addObject("records", records);
-		mv.addObject("recordz", recordz);
-		mv.setViewName("schedule");
-		return mv;
 
 	}
 
 	//削除の処理
-	@RequestMapping("/customer/delete/{date}/{month}/{year}")
+	@RequestMapping("/customer/delete")
 	public ModelAndView delete(
 			@RequestParam("code") int code,
 			@PathVariable(name = "date") String date,
@@ -282,6 +325,7 @@ public class AccountController {
 		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month;
+
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
 		mv.addObject("records", records);
@@ -290,10 +334,8 @@ public class AccountController {
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
 		session.setAttribute("sche", sche);
+		mv.addObject("sche", sche);
 
-		mv.addObject("year", year);
-		mv.addObject("month", month);
-		mv.addObject("date", date);
 		mv.setViewName("schedule");
 		return mv;
 	}
@@ -347,11 +389,13 @@ public class AccountController {
 		//未入力、パスワードが違えばエラー表示
 		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "") {
 			mv.addObject("error", "未入力項目があります。");
+
 			mv.setViewName("edit");
 			return mv;
 
 		} else if (!password.equals(password2)) {
 			mv.addObject("error", "パスワードが一致していません");
+
 			mv.setViewName("edit");
 			return mv;
 
@@ -365,6 +409,7 @@ public class AccountController {
 
 			mv.addObject("account", account);
 			mv.addObject("error", "変更が完了しました。");
+
 			mv.setViewName("customer");
 			return mv;
 

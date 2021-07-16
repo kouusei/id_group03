@@ -22,10 +22,15 @@
 			<td th:text="${list.endtime}"></td>
 			<td th:text="${list.schedule}"></td>
 			<td th:text="${list.schedulememo}"></td>
-	<form action="/customer/delete" method="post">
-		<td><input type="submit" value="削除"></td>
-		<input type="hidden" name="code" th:value="${list.code}">
-	</form>
+			<td>
+				<form action="/customer/delete" method="post">
+					<input type="submit" value="削除">
+					<input type="hidden" name="code" th:value="${list.code}">
+					<input type="hidden" name="date" th:value="${sche.date}">
+					<input type="hidden" name="month" th:value="${sche.month}">
+					<input type="hidden" name="year" th:value="${list.year}">
+				</form>
+			</td>
 		</tr>
 
 	</table>
