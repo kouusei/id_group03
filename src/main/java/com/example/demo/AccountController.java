@@ -314,9 +314,9 @@ public class AccountController {
 	@RequestMapping("/customer/delete")
 	public ModelAndView delete(
 			@RequestParam("code") int code,
-			@PathVariable(name = "date") String date,
-			@PathVariable(name = "month") String month,
-			@PathVariable(name = "year") String year,
+			@RequestParam("date") String date,
+			@RequestParam("month") String month,
+			@RequestParam("year") String year,
 			ModelAndView mv) {
 
 		scheRepository.deleteById(code);
@@ -330,6 +330,9 @@ public class AccountController {
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
 		mv.addObject("records", records);
 		mv.addObject("recordz", recordz);
+		mv.addObject("year", year);
+		mv.addObject("month", month);
+		mv.addObject("date", date);
 
 		//登録するDateのインスタンスを生成
 		MyDate sche = new MyDate(date, month, year);
