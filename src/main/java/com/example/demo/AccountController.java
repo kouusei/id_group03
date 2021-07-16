@@ -345,7 +345,6 @@ public class AccountController {
 			@RequestParam("code") int code,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
-			@RequestParam("password") String password,
 			@RequestParam("tel") String tel,
 			@RequestParam("address") String address,
 			ModelAndView mv) {
@@ -354,7 +353,6 @@ public class AccountController {
 		mv.addObject("code", code);
 		mv.addObject("name", name);
 		mv.addObject("email", email);
-		mv.addObject("password", password);
 		mv.addObject("tel", tel);
 		mv.addObject("address", address);
 
@@ -371,19 +369,11 @@ public class AccountController {
 			@RequestParam("email") String email,
 			@RequestParam("tel") String tel,
 			@RequestParam("address") String address,
-			@RequestParam("password") String password,
-			@RequestParam("password2") String password2,
 			ModelAndView mv) {
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "") {
+		if (name == "" || email == "" ||  tel == "" || address == "") {
 			mv.addObject("error", "未入力項目があります。");
-
-			mv.setViewName("edit");
-			return mv;
-
-		} else if (!password.equals(password2)) {
-			mv.addObject("error", "パスワードが一致していません");
 
 			mv.setViewName("edit");
 			return mv;
@@ -393,7 +383,7 @@ public class AccountController {
 			session.setAttribute("customerInfo2", acc);
 
 			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(code, name, email, password, tel, address);
+			Account account = new Account(code, name, email, tel, address);
 			accountRepository.saveAndFlush(account);
 
 			mv.addObject("account", account);

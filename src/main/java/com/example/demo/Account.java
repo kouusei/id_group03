@@ -44,6 +44,14 @@ public class Account {
 		this.address = address;
 	}
 
+	public Account(int code, String name, String email ,String tel, String address) {
+		this.code = code;
+		this.name = name;
+		this.email = email;
+		this.tel = tel;
+		this.address = address;
+	}
+
 	public Account(String name, String email, String password) {
 		this.name = name;
 		this.email = email;
