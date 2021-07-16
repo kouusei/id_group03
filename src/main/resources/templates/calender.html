@@ -112,9 +112,11 @@
 	  currentMonth = parseInt(selectMonth.value);
 	  showCalendar(currentMonth, currentYear);
 	}
-	 var hoge2 = /*[[${record}]]*/;
+
 	//カレンダーの本体部分の表示
 	function showCalendar(month, year) {
+	  //javaのlistをjavascriptの配列にセット
+	  var hoge = /*[[${records}]]*/;
 
 	  var firstDay = ( new Date( year, month ) ).getDay();
 
@@ -128,7 +130,6 @@
 
 	  // creating all cells（カレンダーを格納するセルの作成）
 	  var date = 1;
-	  var comparison = "仕事";
 
 	  for ( var i = 0; i < 6; i++ ) {
 	      var row = document.createElement("tr");
@@ -149,10 +150,28 @@
 	              cell.setAttribute("data-year", year);
 	              cell.setAttribute("data-month_name", months[month]);
 	              cell.className = "date-picker";
-	              cell.innerHTML = "<span>" +'<a href="/calender/'+ date +"/" + (month+1) + "/"+ year + '">'+date+"</a>" + "</span>";
+	              var month1 = "" + (month+1);
+	        	  var date1 = "" + date;
+	        	  month1 = month1.length == 1 ? "0" + month1 : month1;
+	        	  date1 = date1.length == 1 ? "0" + date1 : date1;
+	              var comparison = year + "/" + month1 + "/" + date1;
+
+	        	  //alert(hoge[0].scheduledate + " " + comparison);
+				  var s = "";
+				  for(var t=0; t<hoge.length; t++){
+					  if(hoge[t].scheduledate == comparison){
+						  s = "★";
+						  break;
+					  }
+				  }
+	              cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '">'+date1+"</a>" + "<br>" + s + "</span>";
+
 	              if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
 	                  cell.className = "date-picker selected";
+
+
 	              }
+
 	              row.appendChild(cell);
 	              date++;
 
@@ -163,14 +182,6 @@
 	  }
 
 	}
-
-	 //javaのlistをjavascriptの配列にセット
-	  var hoge = /*[[${records}]]*/;
-
-
-	  for(var i=0;i<hoge.length;i++){
-		  document.write(hoge[i].scheduledate);
-	  }
 
 	//1か月の日数を設定
 	function daysInMonth(iMonth, iYear) {
