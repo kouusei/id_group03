@@ -21,9 +21,10 @@ if(Pass == ""){
 /*]]>*/
 </script>
 </head>
-<link th:href="@{/css/style4.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
 <body>
 	<h1>お客様情報</h1>
+	<div th:text="${error}" style="color: red;" ></div><br>
 	<table border="1">
 		<tr>
 			<th>名前</th>

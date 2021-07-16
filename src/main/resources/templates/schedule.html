@@ -7,7 +7,7 @@
 </head>
 <body>
 <h1>スケジュール登録</h1>
-<span th:text="${sche.year}"></span>年<span th:text="${sche.month}"></span>月<span th:text="${sche.date}"></span>日
+<b th:text="${sche.year}"></b>年<b th:text="${sche.month}"></b>月<b th:text="${sche.date}"></b>日
 
 <!-- スケジュール表 -->
 
@@ -22,6 +22,10 @@
 			<td th:text="${list.endtime}"></td>
 			<td th:text="${list.schedule}"></td>
 			<td th:text="${list.schedulememo}"></td>
+	<form action="/customer/delete" method="post">
+		<td><input type="submit" value="削除"></td>
+		<input type="hidden" name="code" th:value="${list.code}">
+	</form>
 		</tr>
 
 	</table>
@@ -86,7 +90,7 @@
 
 <!-- スケジュール作成 -->
 <div id="right" class="up">
-<form action="/update" method="post">
+<form action="/update" method="post" style="display:inline;">
 <div th:text="${error}" style="color: red;"></div><br>
 <table style="width:300px;">
 	<tr>
@@ -150,7 +154,7 @@
 	<input type="reset" value="リセット">
 </p>
 </form>
-<form action="/calender" method="post">
+<form id="back" action="/calender" method="post" style="display:inline;">
 	<input type="hidden" name="YEAR" th:value="${sche.year}">
 	<input type="hidden" name="MONTH" th:value="${sche.month}">
 	<input type="hidden" name="DATE" th:value="${sche.date}">

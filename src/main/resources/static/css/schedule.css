@@ -1,4 +1,7 @@
 @charset "UTF-8";
+h1{
+	text-align:center;
+}
 
 table.sche{
 	border:1px solid #a9a9a9;
@@ -88,6 +91,7 @@ p{
 	float:right;
 	width:300px;
 	background-color:#ffffff;
+	display:block;
 }
 
 #contents:after{
@@ -95,6 +99,10 @@ p{
 	display:block;
 	height:0;clear:both;
 	visibility:hidden;
+}
+
+#back{
+	width:400px;
 }
 
 .up{
