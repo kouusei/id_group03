@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>パスワード取得</title>
+</head>
+<link th:href="@{/css/forget.css}" rel="stylesheet" type="text/css">
+<body>
+	<form action="/forget_confirm" method="post">
+		<div th:text="${error}" style="color: red;"></div>
+		<h1>パスワード<br>アシスタント</h1>
+		<input name="email" placeholder="メールアドレス" type="text" /> <input
+			name="email_confirm" placeholder="メールアドレス(確認)" type="text" />
+		<button class="btn">次へ進む</button>
+	</form>
+	<h5>
+		<a href="/login">ログイン画面に戻る</a>
+	</h5>
+</body>
+</html>

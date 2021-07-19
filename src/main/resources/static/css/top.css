@@ -1,34 +1,94 @@
 @charset "UTF-8";
+a{
+  display: inline-block;
+  position: relative;
+  overflow: hidden;
+  color: #fff;
+  text-decoration: none;
+}
+
+a:after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: #fff;
+  transform: translate(-100%, 0);
+  transition: transform cubic-bezier(0.215, 0.61, 0.355, 1) 0.4s;
+  content: "";
+}
+
+a:hover:after {
+  transform: translate(0, 0);
+}
+
+/****** Base style. ******/
+body {
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  font-family: "Yu Gothic Medium", "游ゴシック Medium", "Yu Gothic", "游ゴシック", YuGothic, "ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro", "メイリオ", "Meiryo";
+  line-height: 1.4;
+  font-size: 20px;
+  background-color: #999;
+}
+
+li {
+  list-style: none;
+  margin: 15px 0;
+}
+
+html {
+  height:100%;
+}
+
+.bg {
+  animation:slide 3s ease-in-out infinite alternate;
+  background-image: linear-gradient(-60deg, #6c3 50%, rgb(128, 255, 255) 50%);
+  bottom:0;
+  left:-50%;
+  opacity:.5;
+  position:fixed;
+  right:-50%;
+  top:0;
+  z-index:-1;
+}
+
+.bg2 {
+  animation-direction:alternate-reverse;
+  animation-duration:4s;
+}
+
+.bg3 {
+  animation-duration:5s;
+}
+
+.content {
+  left:50%;
+  padding:10vmin;
+  position:fixed;
+  text-align:center;
+  top:50%;
+  transform:translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+}
 
 h1 {
+	top:40%;
 	margin: 75px;
 	text-align: center;
+	font-family:monospace;
 }
 
-table {
-	text-align: center;
-	width:340px;
-	height:140px;
-	margin: auto;
-}
-
-p {
-	text-align: center;
-}
-
-input.btn-border {
-	border: 2px solid #000;
-	border-radius: 0;
-	background: #fff;
-	font-weight: bold;
-	font-size:25px;
-}
-
-input.btn-border:hover {
-	color: #fff;
-	background: #000;
-}
-
-body {
-	background-color:white;
+@keyframes slide {
+  0% {
+    transform:translateX(-25%);
+  }
+  100% {
+    transform:translateX(25%);
+  }
 }

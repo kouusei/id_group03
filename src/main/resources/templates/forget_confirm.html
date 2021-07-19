@@ -1,0 +1,17 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>ID確認</title>
+</head>
+<link th:href="@{/css/forget_confirm.css}" rel="stylesheet"
+	type="text/css">
+<body>
+	<div style="margin-top:150px; margin-bottom:0px; font-size:20px;">メールアドレスに届いたIDを入力してください</div>
+	<form action="/forget_confirm" method="post">
+		<div th:text="${error}" style="color: red;"></div>
+		<h1>ID入力</h1>
+		<input name="email" placeholder="ID入力" type="text" />
+		<button class="btn">パスワードを取得</button>
+	</form>
+</body>
+</html>

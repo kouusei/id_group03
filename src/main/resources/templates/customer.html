@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <title>お客様情報</title>
 </head>
-<link th:href="@{/css/login.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/customer.css}" rel="stylesheet" type="text/css">
 <body>
 	<h1>お客様情報</h1>
 	<div th:text="${error}" style="color: red;" ></div><br>
@@ -32,7 +32,6 @@
 		<input type="hidden" name="code" th:value="${account.code}">
 		<input type="hidden" name="name" th:value="${account.name}">
 		<input type="hidden" name="email" th:value="${account.email}">
-		<input type="hidden" name="password" th:value="${account.password}">
 		<input type="hidden" name="tel" th:value="${account.tel}">
 		<input type="hidden" name="address" th:value="${account.address}">
 	</form>

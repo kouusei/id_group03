@@ -6,45 +6,20 @@
 </head>
 <link th:href="@{/css/signup.css}" rel="stylesheet" type="text/css">
 <body>
-	<h1>新規登録</h1>
 	<form action="/signup" method="post">
-		<div th:text="${error}" style="color: red;"></div>
-		<br>
-		<table border="1">
-			<tr>
-				<th>名前</th>
-				<td><input type="text" name="name" placeholder="名前"></td>
-			</tr>
-			<tr>
-				<th>メールアドレス</th>
-				<td><input type="email" name="email" placeholder="メールアドレス"></td>
-			</tr>
-			<tr>
-				<th>パスワード</th>
-				<td><input type="password" name="password" placeholder="パスワード"></td>
-			</tr>
-			<tr>
-				<th>パスワード確認</th>
-				<td><input type="password" name="password2" placeholder="※パスワード(確認用)"></td>
-			</tr>
-			<tr>
-				<th>電話番号</th>
-				<td><input type="text" name="tel" placeholder="電話番号"></td>
-			</tr>
-			<tr>
-				<th>住所</th>
-				<td><input type="text" name="address" placeholder="住所"></td>
-			</tr>
-
-		</table>
-		<br>
-		<p>
-			<input type="submit" class="btn btn-border" value="登録">
-		</p>
+		<div th:text="${error}" style="color: red; margin-top: 30px;"></div>
+		<div th:text="${error2}" style="color: red; margin-top: 0px;"></div>
+		<h1>新規登録</h1>
+		<input type="text" name="name" placeholder="名前"> <input
+			type="email" name="email" placeholder="メールアドレス"><input
+			type="password" name="password" placeholder="パスワード"><input
+			type="password" name="password2" placeholder="パスワード(確認)"><input
+			type="text" name="tel" placeholder="電話番号"> <input type="text"
+			name="address" placeholder="住所">
+		<button class="btn">登録</button>
 	</form>
-	<br>
-	<div class="login">
-		<a href="/login">ログイン</a>はこちら
-	</div>
+	<h5>
+		<a href="/login">ログイン</a>
+	</h5>
 </body>
 </html>
