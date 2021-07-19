@@ -41,10 +41,11 @@ public class Account {
 
 	}
 
-	public Account(int code, String name, String email ,String tel, String address, String secret, String answer) {
+	public Account(int code, String name, String email ,String password ,String tel, String address, String secret, String answer) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
+		this.password = password;
 		this.tel = tel;
 		this.address = address;
 		this.secret = secret;

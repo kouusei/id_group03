@@ -244,7 +244,10 @@ public class AccountController {
 
 	//お客様情報からカレンダーに戻る
 	@RequestMapping("/edit/calender")
-	public ModelAndView customer(ModelAndView mv) {
+	public ModelAndView edit_customer(
+			ModelAndView mv) {
+
+		session.invalidate();
 
 		List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
 		mv.addObject("records", records);
@@ -401,6 +404,7 @@ public class AccountController {
 			@RequestParam("code") int code,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
+			@RequestParam("password") String password,
 			@RequestParam("tel") String tel,
 			@RequestParam("address") String address,
 			@RequestParam("secret") String secret,
@@ -412,6 +416,7 @@ public class AccountController {
 		mv.addObject("code", code);
 		mv.addObject("name", name);
 		mv.addObject("email", email);
+		mv.addObject("password", password);
 		mv.addObject("tel", tel);
 		mv.addObject("address", address);
 		mv.addObject("secret", secret);
@@ -428,6 +433,7 @@ public class AccountController {
 			@RequestParam("code") int code,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
+			@RequestParam("password") String password,
 			@RequestParam("tel") String tel,
 			@RequestParam("address") String address,
 			@RequestParam("secret") String secret,
@@ -446,7 +452,7 @@ public class AccountController {
 			session.setAttribute("customerInfo", acc);
 
 			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(code, name, email, tel, address, secret, answer);
+			Account account = new Account(code, name, email,password, tel, address, secret, answer);
 			accountRepository.saveAndFlush(account);
 
 			mv.addObject("account", account);

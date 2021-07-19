@@ -1,6 +1,7 @@
 @charset "UTF-8";
 div {
 	text-align:center;
+	font-size:18px;
 }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, nav,

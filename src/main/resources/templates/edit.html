@@ -6,41 +6,18 @@
 </head>
 <link th:href="@{/css/edit.css}" rel="stylesheet" type="text/css">
 <body>
-	<h1>お客様情報 変更</h1>
 	<form action="/customer" method="post">
-		<p><span th:text="${error}" style="color: red;"></span></p>
-		<br>
-		<table border="1">
-			<tr>
-				<input type="hidden" name="code" th:value="${code}">
-				<th>名前</th>
-				<td><input type="text" name="name" th:value="${name}"></td>
-			</tr>
-			<tr>
-				<th>メールアドレス</th>
-				<td><input type="email" name="email" th:value="${email}"></td>
-			</tr>
-			<tr>
-				<th>電話番号</th>
-				<td><input type="text" name="tel" th:value="${tel}"></td>
-			</tr>
-			<tr>
-				<th>住所</th>
-				<td><input type="text" name="address" th:value="${address}"></td>
-			</tr>
-			<tr>
-				<th>秘密の質問</th>
-				<td><input type="text" name="secret" th:value="${secret}"></td>
-			</tr>
-			<tr>
-				<th>質問の答え</th>
-				<td><input type="text" name="answer" th:value="${answer}"></td>
-			</tr>
-		</table>
-		<br>
-		<p>
-			<input type="submit" class="btn btn-border" value="更新">
-		</p>
+		<div th:text="${error}" style="color: red; margin-top: 30px;"></div>
+		<input type="hidden" name="code" th:value="${code}">
+		<input type="hidden" name="password" th:value="${password}">
+		<h1>お客様情報<br>変更</h1>
+		<input type="text" name="name" th:value="${name}" placeholder="名前">
+		<input type="email" name="email" th:value="${email}" placeholder="メールアドレス">
+		<input type="text" name="tel" th:value="${tel}" placeholder="電話番号">
+		<input type="text" name="address" th:value="${address}" placeholder="住所">
+		<input type="text" name="secret" th:value="${secret}" placeholder="秘密の質問">
+		<input type="text" name="answer" th:value="${answer}" placeholder="質問の答え">
+		<button class="btn">更新</button>
 	</form>
 </body>
 </html>
