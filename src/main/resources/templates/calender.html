@@ -44,6 +44,7 @@
 
               </select>
           </div>
+          <span class="account"><a th:href="'/customer/' + ${session.customerInfo.name}" th:text="${session.customerInfo.name}"></a>さんがログイン中</span>
           <br>
           <table class="sche" border="1" >
           	<caption>スケジュール</caption>
@@ -202,8 +203,6 @@
 	}
 	/*]]>*/
 </script>
-
-<span class="account"><a th:href="'/customer/' + ${session.customerInfo.name}" th:text="${session.customerInfo.name}"></a>さんがログイン中</span>
 
 </body>
 </html>

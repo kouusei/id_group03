@@ -1,9 +1,8 @@
 @charset "UTF-8";
 
 body {
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  font-family: "Open Sans", sans-serif;
+  line-height: 1.25;
 }
 
 .wrapper {
@@ -46,7 +45,27 @@ tbody.pop td:hover{
 
 	background: #00ffff;
 }
+.sche{
+	border-collapse: collapse;
+  	margin: 0 auto;
+  	padding: 0;
+  	width: 1000px;
+  	table-layout: fixed;
+}
+.sche th{
+	font-family: "Open Sans", sans-serif;
+	background:#e81010;
+	color:#fff;
+	border-bottom: solid 2px #fb5144;
+  	padding: 10px 0;
+}
 
+.sche tr{
+	font-family: "Open Sans", sans-serif;
+	border-bottom: solid 2px #ddd;
+  	text-align: center;
+  	padding: 10px 0;
+}
 
 .date-picker.selected {
 	font-weight: bold;
