@@ -1,10 +1,5 @@
 @charset "UTF-8";
 
-body {
-  font-family: "Open Sans", sans-serif;
-  line-height: 1.25;
-}
-
 .wrapper {
 	margin: 15px auto;
 	max-width: 700px;
@@ -31,6 +26,7 @@ body {
 
 .table-calendar {
 	border-collapse: collapse;
+	background:white;
 	width: 100%;
 }
 
@@ -51,10 +47,11 @@ tbody.pop td:hover{
   	padding: 0;
   	width: 1000px;
   	table-layout: fixed;
+  	background:white;
 }
 .sche th{
 	font-family: "Open Sans", sans-serif;
-	background:#e81010;
+	background:#ff8080;
 	color:#fff;
 	border-bottom: solid 2px #fb5144;
   	padding: 10px 0;
@@ -125,4 +122,23 @@ tbody.pop td:hover{
 span.account {
 	font-size:20px;
 	float:left;
+}
+
+body {
+	text-align:center;
+  background: linear-gradient(-45deg, #ee7752, #44BB33, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
 }
