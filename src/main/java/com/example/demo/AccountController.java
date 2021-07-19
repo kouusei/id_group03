@@ -247,8 +247,6 @@ public class AccountController {
 	public ModelAndView edit_customer(
 			ModelAndView mv) {
 
-		session.invalidate();
-
 		List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
 		mv.addObject("records", records);
 
@@ -455,6 +453,11 @@ public class AccountController {
 			//登録するAccountエンティティのインスタンスを生成
 			Account account = new Account(code, name, email,password, tel, address, secret, answer);
 			accountRepository.saveAndFlush(account);
+
+			Account customerInfo = accountRepository.findByName(name);
+
+			session.setAttribute("customerInfo", customerInfo);
+			mv.addObject("customerInfo",customerInfo);
 
 			mv.addObject("account", account);
 			mv.addObject("error", "変更が完了しました。");
