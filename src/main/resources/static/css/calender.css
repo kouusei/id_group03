@@ -1,12 +1,18 @@
 @charset "UTF-8";
 
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+}
+
 .wrapper {
 	margin: 15px auto;
 	max-width: 700px;
 }
 
 .container-calendar {
-	background: #ffffff;
+
 	padding: 15px;
 	width: 98%;
 	margin: 0 auto;
@@ -37,6 +43,7 @@
 }
 
 tbody.pop td:hover{
+
 	background: #00ffff;
 }
 
