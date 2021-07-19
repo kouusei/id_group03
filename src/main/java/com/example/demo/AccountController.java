@@ -69,7 +69,7 @@ public class AccountController {
 			}
 
 			Account customerInfo = record.get(0);
-			List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
+			List<Sche> records = scheRepository.findAll();
 			mv.addObject("records", records);
 
 			// セッションスコープにログイン名とカテゴリ情報を格納する
@@ -130,8 +130,6 @@ public class AccountController {
 			return mv;
 
 		} else {
-			List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
-			mv.addObject("records", records);
 			//登録するAccountエンティティのインスタンスを生成
 			Account account = new Account(name, email, password, tel, address);
 
@@ -180,7 +178,7 @@ public class AccountController {
 		MyDate cale = new MyDate(date, month, year);
 		mv.addObject("cale", cale);
 
-		List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
+		List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
 
 		mv.setViewName("calender");
@@ -206,7 +204,7 @@ public class AccountController {
 	@RequestMapping("/edit/calender")
 	public ModelAndView customer(ModelAndView mv) {
 
-		List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
+		List<Sche> records = scheRepository.findAll();
 		mv.addObject("records", records);
 
 		mv.setViewName("calender");
@@ -259,7 +257,7 @@ public class AccountController {
 			mv.setViewName("schedule");
 			return mv;
 
-		} else if (Start < End && starT < enD) {
+		} else if (Start + starT > End + enD) {
 
 			month = month.length() == 1 ? "0" + month : month;
 			date = date.length() == 1 ? "0" + date : date;
