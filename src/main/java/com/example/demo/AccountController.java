@@ -53,7 +53,7 @@ public class AccountController {
 
 		//emailとpasswordがからの場合エラー
 		if (email == null || email.length() == 0 || password == null || password.length() == 0) {
-			mv.addObject("end", "メールアドレスとパスワードを入力してください");
+			mv.addObject("error", "未入力項目があります");
 			mv.setViewName("login");
 			return mv;
 
@@ -62,7 +62,8 @@ public class AccountController {
 			List<Account> record = accountRepository.findByEmailLikeAndPasswordLike(email, password);
 
 			if (record.size() == 0) {
-				mv.addObject("error", "メールアドレスかパスワードが一致しません");
+				mv.addObject("error", "メールアドレスかパスワードが");
+				mv.addObject("error2", "一致しません");
 				mv.setViewName("login");
 				return mv;
 			}
@@ -84,6 +85,24 @@ public class AccountController {
 	public ModelAndView signup(ModelAndView mv) {
 
 		mv.setViewName("signup");
+
+		return mv;
+	}
+
+	//パスワード忘れ画面
+	@RequestMapping("/forget")
+	public ModelAndView forget(ModelAndView mv) {
+
+		mv.setViewName("forget");
+
+		return mv;
+	}
+
+	//パスワード忘れ画面
+	@RequestMapping("/forget_confirm")
+	public ModelAndView forget_confirm(ModelAndView mv) {
+
+		mv.setViewName("forget_confirm");
 
 		return mv;
 	}
@@ -173,14 +192,9 @@ public class AccountController {
 			@PathVariable(name = "customerInfo.name") String name,
 			ModelAndView mv) {
 
-		Account account = (Account) session.getAttribute("customerInfo");
-		String password = account.getPassword();
-
 		Account accountList = accountRepository.findByName(name);
 
 		mv.addObject("account", accountList);
-		mv.addObject("pass", password);
-
 		mv.setViewName("customer");
 
 		return mv;
@@ -372,7 +386,7 @@ public class AccountController {
 			ModelAndView mv) {
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" ||  tel == "" || address == "") {
+		if (name == "" || email == "" || tel == "" || address == "") {
 			mv.addObject("error", "未入力項目があります。");
 
 			mv.setViewName("edit");
