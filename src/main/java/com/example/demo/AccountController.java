@@ -108,7 +108,7 @@ public class AccountController {
 	}
 
 	//新規登録後
-	@PostMapping("/signup")
+	@PostMapping("/signup_confirm")
 	public ModelAndView signup_error(
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
@@ -116,10 +116,13 @@ public class AccountController {
 			@RequestParam("address") String address,
 			@RequestParam("password") String password,
 			@RequestParam("password2") String password2,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "") {
+		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "" || secret == ""
+				|| answer == "") {
 			mv.addObject("error", "未入力項目があります。");
 			mv.setViewName("signup");
 			return mv;
@@ -130,15 +133,41 @@ public class AccountController {
 			return mv;
 
 		} else {
-			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(name, email, password, tel, address);
+			mv.addObject("name", name);
+			mv.addObject("email", email);
+			mv.addObject("password", password);
+			mv.addObject("tel", tel);
+			mv.addObject("address", address);
+			mv.addObject("secret", secret);
+			mv.addObject("answer", answer);
+			mv.addObject("error", "以下の情報でよろしいですか?");
 
-			accountRepository.saveAndFlush(account);
-			mv.addObject("error", "新規登録できました。");
-			mv.setViewName("login");
+			mv.setViewName("signup_confirm");
 			return mv;
 
 		}
+	}
+
+	//新規登録確認
+	@PostMapping("/signup")
+	public ModelAndView signup_confirm(
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("tel") String tel,
+			@RequestParam("address") String address,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+		//登録するAccountエンティティのインスタンスを生成
+		Account account = new Account(name, email, password, tel, address, secret, answer);
+
+		accountRepository.saveAndFlush(account);
+		mv.addObject("error", "新規登録できました。");
+
+		mv.setViewName("login");
+
+		return mv;
 	}
 
 	//スケジュール画面へ遷移
@@ -361,6 +390,9 @@ public class AccountController {
 			@RequestParam("email") String email,
 			@RequestParam("tel") String tel,
 			@RequestParam("address") String address,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+
 			ModelAndView mv) {
 
 		//Thymeleafで表示する準備
@@ -369,6 +401,8 @@ public class AccountController {
 		mv.addObject("email", email);
 		mv.addObject("tel", tel);
 		mv.addObject("address", address);
+		mv.addObject("secret", secret);
+		mv.addObject("answer", answer);
 
 		mv.setViewName("edit");
 		return mv;
@@ -383,10 +417,12 @@ public class AccountController {
 			@RequestParam("email") String email,
 			@RequestParam("tel") String tel,
 			@RequestParam("address") String address,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || tel == "" || address == "") {
+		if (name == "" || email == "" || tel == "" || address == "" || secret == "" || answer == "") {
 			mv.addObject("error", "未入力項目があります。");
 
 			mv.setViewName("edit");
@@ -394,10 +430,10 @@ public class AccountController {
 
 		} else {
 			Account acc = (Account) session.getAttribute("customerInfo");
-			session.setAttribute("customerInfo2", acc);
+			session.setAttribute("customerInfo", acc);
 
 			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(code, name, email, tel, address);
+			Account account = new Account(code, name, email, tel, address, secret, answer);
 			accountRepository.saveAndFlush(account);
 
 			mv.addObject("account", account);

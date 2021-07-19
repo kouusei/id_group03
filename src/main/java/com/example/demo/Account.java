@@ -31,25 +31,24 @@ public class Account {
 	@Column(name="address")
 	private String address;
 
+	@Column(name="secret")
+	private String secret;
+
+	@Column(name="answer")
+	private String answer;
+
 	public Account() {
 
 	}
 
-	public Account(int code, String name, String email, String password ,String tel, String address) {
-		this.code = code;
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.tel = tel;
-		this.address = address;
-	}
-
-	public Account(int code, String name, String email ,String tel, String address) {
+	public Account(int code, String name, String email ,String tel, String address, String secret, String answer) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
 		this.tel = tel;
 		this.address = address;
+		this.secret = secret;
+		this.answer = answer;
 	}
 
 	public Account(String name, String email, String password) {
@@ -58,12 +57,14 @@ public class Account {
 		this.password = password;
 	}
 
-	public Account(String name, String email, String password ,String tel, String address) {
+	public Account(String name, String email, String password ,String tel, String address, String secret, String answer) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.tel = tel;
 		this.address = address;
+		this.secret = secret;
+		this.answer = answer;
 	}
 
 	public int getCode() {
@@ -114,5 +115,20 @@ public class Account {
 		this.address = address;
 	}
 
+	public String getSecret() {
+		return secret;
+	}
+
+	public void setSecret(String secret) {
+		this.secret = secret;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
 }
 

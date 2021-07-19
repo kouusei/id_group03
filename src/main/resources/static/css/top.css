@@ -5,6 +5,7 @@ a{
   overflow: hidden;
   color: #fff;
   text-decoration: none;
+  font-size:25px;
 }
 
 a:after {
