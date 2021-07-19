@@ -6,11 +6,13 @@
 </head>
 <link th:href="@{/css/forget.css}" rel="stylesheet" type="text/css">
 <body>
-	<form action="/forget_confirm" method="post">
-		<div th:text="${error}" style="color: red;"></div>
+	<form action="/forget" method="post">
+		<div th:text="${error}" style="color: red; margin-top: 30px;"></div>
+		<div th:text="${error2}" style="color: red; margin-top: 0px;"></div>
 		<h1>パスワード<br>アシスタント</h1>
-		<input name="email" placeholder="メールアドレス" type="text" /> <input
-			name="email_confirm" placeholder="メールアドレス(確認)" type="text" />
+		<input name="email" placeholder="メールアドレス" type="text">
+		<input type="hidden" name="secret" th:value="${secret}">
+		<input type="hidden" name="answer" th:value="${answer}">
 		<button class="btn">次へ進む</button>
 	</form>
 	<h5>

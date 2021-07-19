@@ -65,7 +65,7 @@ form {
 	padding-top: 5px;
 	width: 300px;
 	margin: 150px auto;
-	margin-top: 50px;
+	margin-top: 150px;
 	margin-bottom: 50px;
 	box-shadow: 15px 15px 0px rgba(0, 0, 0, .1);
 	font-family: inherit;
@@ -112,4 +112,35 @@ input {
 .btn:active {
 	top: 3px;
 	box-shadow: none;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.box-after {
+ position: relative;
+ margin: 2em 0;
+ padding: 0.5em 1em;
+ border-radius: 0 10px 10px 10px;
+}
+.box-after .box-title {
+ position: absolute;
+ top: -27px;
+ left: -3px;
+ padding: 0 9px;
+ height: 25px;
+ line-height: 25px;
+ vertical-align: middle;
+ font-size: 17px;
+ font-weight: bold;
+ border-radius: 5px 5px 0 0;
 }
