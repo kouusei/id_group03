@@ -36,6 +36,11 @@
 	vertical-align: top;
 }
 
+tbody.pop td:hover{
+	background: #00ffff;
+}
+
+
 .date-picker.selected {
 	font-weight: bold;
 	color: #fff;

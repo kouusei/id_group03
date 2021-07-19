@@ -20,7 +20,7 @@
 
           <table class="table-calendar" id="calendar" data-lang="ja">
               <thead id="thead-month"></thead>
-              <tbody id="calendar-body"></tbody>
+              <tbody id="calendar-body" class="pop"></tbody>
           </table>
 
 		<!-- 年月を選択すると、選択した年と月のカレンダーが表示される -->
@@ -44,6 +44,19 @@
 
               </select>
           </div>
+          <br>
+          <table class="sche" border="1" >
+          	<caption>スケジュール</caption>
+			<tr><th>日付</th><th>開始時刻</th><th>終了時刻</th><th>予定</th><th>メモ</th></tr>
+			<tr th:each="list:${records}">
+				<td th:text="${list.scheduledate}"></td>
+				<td th:text="${list.starttime}"></td>
+				<td th:text="${list.endtime}"></td>
+				<td th:text="${list.schedule}"></td>
+				<td th:text="${list.schedulememo}"></td>
+			</tr>
+		  </table>
+		  <br>
     </div>
 
 <script th:inline="javascript">

@@ -40,57 +40,58 @@
 <table class="schedule" border="1">
 	<caption>本日のスケジュール</caption>
 	<tr><td class="top" width="80px">時刻</td><td class="top" width="300px">予定</td></tr>
-	<tr><td class="time">01:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '1:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '1:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">02:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '2:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '2:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">03:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '3:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '3:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">04:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '4:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '4:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">05:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '5:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '5:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">06:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '6:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '6:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">07:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '7:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '7:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">08:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '8:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '8:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">09:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '9:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '9:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">10:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '10:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '10:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">11:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '11:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '11:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">12:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '12:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '12:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">13:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '13:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '13:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">14:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '14:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb" ><span th:each="time:${records}" th:if="${time.starttime == '14:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">15:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '15:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '15:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">16:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '16:00'}" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '16:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">17:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '17:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '17:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">18:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '18:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '18:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">19:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '19:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '19:30'}" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">20:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '20:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '20:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">21:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '21:00' }"th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '21:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">22:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '22:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '22:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">23:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '23:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '23:30' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="time">24:00</td><td class="contents"><span th:each="time:${records}" th:if="${time.starttime == '24:00' }" th:text="${time.schedule}"></span></td></tr>
-	<tr><td class="timeb"></td><td class="contentsb"><span th:each="time:${records}" th:if="${time.starttime == '24:30' }" th:text="${time.schedule}"></span></td></tr>
+	<tr><td class="time">01:00</td><td th:each="time:${records}" th:if="${time.starttime == '1:00' }" style="background: #00ff00;" th:text="${time.schedule}" ></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '1:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">02:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '2:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '2:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">03:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '3:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '3:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">04:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '4:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '4:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">05:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '5:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '5:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">06:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '6:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '6:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">07:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '7:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '7:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">08:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '8:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '8:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">09:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '9:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '9:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">10:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '10:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '10:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">11:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '11:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '11:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">12:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '12:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '12:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">13:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '13:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '13:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">14:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '14:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb"  th:each="time:${records}" th:if="${time.starttime == '14:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">15:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '15:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '15:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">16:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '16:00'}" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '16:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">17:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '17:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '17:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">18:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '18:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '18:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">19:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '19:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '19:30'}" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">20:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '20:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '20:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">21:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '21:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '21:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">22:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '22:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '22:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">23:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '23:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '23:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="time">24:00</td><td class="contents" th:each="time:${records}" th:if="${time.starttime == '24:00' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
+	<tr><td class="timeb"></td><td class="contentsb" th:each="time:${records}" th:if="${time.starttime == '24:30' }" style="background: #00ff00;" th:text="${time.schedule}"></td></tr>
 </table>
 <br>
 </div>
+
 
 <!-- スケジュール作成 -->
 <div id="right" class="up">

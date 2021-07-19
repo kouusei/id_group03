@@ -9,4 +9,5 @@ public interface ScheRepository extends JpaRepository<Sche, Integer>{
 	List<Sche> findBySchedule(String schedule);
 	List<Sche> findByScheduledate(String scheduledate);
 	List<Sche> findByScheduledateLikeOrderByScheduledateAsc(String scheduledate);
+	List<Sche> findAllByOrderByScheduledateAsc();
 }
