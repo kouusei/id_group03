@@ -41,7 +41,7 @@
 <caption><b th:text="${sche.month}"></b>/<b th:text="${sche.date}"></b>のスケジュール</caption>
 	<tr><td class="top" width="80px">時刻</td><td class="top" width="300px">予定</td></tr>
 	<tr th:each="time:${times}">
-		<td class="time" th:text="${time}"></td><td class="contents" th:each="list:${records}" th:if="${time >= list.starttime and time <= list.endtime}" style="background: #00ff00;" th:text="${list.schedule}"></td>
+		<td class="time" th:text="${time}"></td><td class="contents" th:each="list:${records}" th:if="${time >= list.starttime and time < list.endtime}" style="background: #00ff00;" th:text="${list.schedule}"></td>
 	</tr>
 </table>
 <br>
