@@ -27,8 +27,6 @@ public class AccountController {
 	//トップ画面
 	@RequestMapping("/")
 	public ModelAndView top(ModelAndView mv) {
-		Account ACC = (Account) session.getAttribute("login");
-		mv.addObject("login", ACC);
 
 		mv.setViewName("top");
 
@@ -91,7 +89,8 @@ public class AccountController {
 
 	//パスワード忘れ画面
 	@RequestMapping("/forget")
-	public ModelAndView forget(ModelAndView mv) {
+	public ModelAndView forget(
+			ModelAndView mv) {
 
 		mv.setViewName("forget");
 
@@ -102,8 +101,6 @@ public class AccountController {
 	@PostMapping("/forget")
 	public ModelAndView reforget(
 			@RequestParam("email") String email,
-			@RequestParam("secret") String secret,
-			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
 		List<Account> _email = accountRepository.findByEmailLike(email);
@@ -124,7 +121,7 @@ public class AccountController {
 
 		} else {
 
-			Account account = new Account(secret, answer);
+			Account account = _email.get(0);
 			mv.addObject("account", account);
 			mv.setViewName("forget_confirm");
 			return mv;
@@ -132,12 +129,50 @@ public class AccountController {
 
 	}
 
-	//パスワード忘れ画面
-	@PostMapping("/forget_confirm")
+	//パスワード取得画面遷移
+	@RequestMapping("/forget_confirm")
 	public ModelAndView forget_confirm(
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
-		mv.setViewName("forget_confirm");
+		List<Account> account = accountRepository.findByAnswerLike(answer);
+
+		if (answer == "") {
+
+			mv.addObject("error", "回答してください");
+			mv.addObject("account", account);
+			mv.addObject("secret", secret);
+			mv.setViewName("forget_confirm");
+			return mv;
+
+		} else if (account.size() == 0) {
+
+			mv.addObject("error", "回答が間違っています");
+			mv.addObject("account", account);
+			mv.addObject("secret", secret);
+			mv.setViewName("forget_confirm");
+			return mv;
+
+		} else {
+
+			Account _account = account.get(0);
+			session.setAttribute("password", account);
+			mv.addObject("success", "パスワードはこちらです");
+			mv.addObject("account", _account);
+			mv.setViewName("forget_confirm");
+
+			return mv;
+		}
+
+	}
+
+	//ログイン画面
+	@RequestMapping("/login/back")
+	public ModelAndView login_back(ModelAndView mv) {
+
+		session.invalidate();
+		mv.setViewName("login");
 
 		return mv;
 	}
@@ -161,6 +196,14 @@ public class AccountController {
 		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "" || secret == ""
 				|| answer == "") {
 			mv.addObject("error", "未入力項目があります");
+			mv.addObject("name", name);
+			mv.addObject("email", email);
+			mv.addObject("password", password);
+			mv.addObject("password2", password2);
+			mv.addObject("tel", tel);
+			mv.addObject("address", address);
+			mv.addObject("secret", secret);
+			mv.addObject("answer", answer);
 			mv.setViewName("signup");
 			return mv;
 
@@ -172,6 +215,14 @@ public class AccountController {
 
 		} else if (!password.equals(password2)) {
 			mv.addObject("error", "パスワードが一致していません");
+			mv.addObject("name", name);
+			mv.addObject("email", email);
+			mv.addObject("password", password);
+			mv.addObject("password2", password2);
+			mv.addObject("tel", tel);
+			mv.addObject("address", address);
+			mv.addObject("secret", secret);
+			mv.addObject("answer", answer);
 			mv.setViewName("signup");
 			return mv;
 
@@ -408,6 +459,14 @@ public class AccountController {
 
 		scheRepository.deleteById(code);
 
+		String times[] = { "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+				"06:00",
+				"06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
+				"12:00",
+				"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
+				"18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00",
+				"23:30", "24:00", "24:30" };
+		mv.addObject("times", times);
 		month = month.length() == 1 ? "0" + month : month;
 		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
@@ -484,14 +543,20 @@ public class AccountController {
 
 		//未入力、パスワードが違えばエラー表示
 		if (name == "" || email == "" || tel == "" || address == "" || secret == "" || answer == "") {
-			mv.addObject("error", "未入力項目があります。");
 
+			mv.addObject("error", "未入力項目があります。");
+			mv.addObject("code",code);
+			mv.addObject("name",name);
+			mv.addObject("email",email);
+			mv.addObject("password",password);
+			mv.addObject("tel",tel);
+			mv.addObject("address",address);
+			mv.addObject("secret",secret);
+			mv.addObject("answer",answer);
 			mv.setViewName("edit");
 			return mv;
 
 		} else {
-			Account acc = (Account) session.getAttribute("customerInfo");
-			session.setAttribute("customerInfo", acc);
 
 			//登録するAccountエンティティのインスタンスを生成
 			Account account = new Account(code, name, email, password, tel, address, secret, answer);

@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>パスワード取得</title>
+<title>パスワードアシスタンス</title>
 </head>
 <link th:href="@{/css/forget.css}" rel="stylesheet" type="text/css">
 <body>
@@ -11,8 +11,8 @@
 		<div th:text="${error2}" style="color: red; margin-top: 0px;"></div>
 		<h1>パスワード<br>アシスタント</h1>
 		<input name="email" placeholder="メールアドレス" type="text">
-		<input type="hidden" name="secret" th:value="${secret}">
-		<input type="hidden" name="answer" th:value="${answer}">
+	<!-- <input type="hidden" name="secret">
+		<input type="hidden" name="answer">-->
 		<button class="btn">次へ進む</button>
 	</form>
 	<h5>
