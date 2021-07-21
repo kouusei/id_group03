@@ -530,27 +530,6 @@ public class AccountController {
 
 	}
 
-	//変更画面からお客様情報に戻る
-	@RequestMapping("/customer/back")
-	public ModelAndView customer_(
-			@RequestParam("code") int code,
-			@RequestParam("name") String name,
-			@RequestParam("email") String email,
-			@RequestParam("password") String password,
-			@RequestParam("secret") String secret,
-			@RequestParam("answer") String answer,
-			ModelAndView mv) {
-
-		Account account = new Account(code, name, email, password, secret, answer);
-		accountRepository.saveAndFlush(account);
-
-		//Thymeleafで表示する準備
-		mv.addObject("account", account);
-		mv.setViewName("customer");
-		return mv;
-
-	}
-
 	//お客様情報変更後戻る
 	@PostMapping("/customer")
 	public ModelAndView edit(
