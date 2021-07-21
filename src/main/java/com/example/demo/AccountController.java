@@ -182,8 +182,6 @@ public class AccountController {
 	public ModelAndView signup_error(
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
-			@RequestParam("tel") String tel,
-			@RequestParam("address") String address,
 			@RequestParam("password") String password,
 			@RequestParam("password2") String password2,
 			@RequestParam("secret") String secret,
@@ -193,15 +191,13 @@ public class AccountController {
 		List<Account> Email = accountRepository.findByEmailLike(email);
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || password == "" || password2 == "" || tel == "" || address == "" || secret == ""
+		if (name == "" || email == "" || password == "" || password2 == ""  || secret == ""
 				|| answer == "") {
 			mv.addObject("error", "未入力項目があります");
 			mv.addObject("name", name);
 			mv.addObject("email", email);
 			mv.addObject("password", password);
 			mv.addObject("password2", password2);
-			mv.addObject("tel", tel);
-			mv.addObject("address", address);
 			mv.addObject("secret", secret);
 			mv.addObject("answer", answer);
 			mv.setViewName("signup");
@@ -219,8 +215,6 @@ public class AccountController {
 			mv.addObject("email", email);
 			mv.addObject("password", password);
 			mv.addObject("password2", password2);
-			mv.addObject("tel", tel);
-			mv.addObject("address", address);
 			mv.addObject("secret", secret);
 			mv.addObject("answer", answer);
 			mv.setViewName("signup");
@@ -230,8 +224,6 @@ public class AccountController {
 			mv.addObject("name", name);
 			mv.addObject("email", email);
 			mv.addObject("password", password);
-			mv.addObject("tel", tel);
-			mv.addObject("address", address);
 			mv.addObject("secret", secret);
 			mv.addObject("answer", answer);
 			mv.addObject("error", "以下の情報でよろしいですか?");
@@ -248,13 +240,11 @@ public class AccountController {
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
-			@RequestParam("tel") String tel,
-			@RequestParam("address") String address,
 			@RequestParam("secret") String secret,
 			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 		//登録するAccountエンティティのインスタンスを生成
-		Account account = new Account(name, email, password, tel, address, secret, answer);
+		Account account = new Account(name, email, password, secret, answer);
 
 		accountRepository.saveAndFlush(account);
 		mv.addObject("error", "新規登録できました。");
@@ -516,14 +506,12 @@ public class AccountController {
 	}
 
 	//お客様情報変更画面遷移
-	@PostMapping("/edit")
+	@RequestMapping("/edit")
 	public ModelAndView customer_edit(
 			@RequestParam("code") int code,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
-			@RequestParam("tel") String tel,
-			@RequestParam("address") String address,
 			@RequestParam("secret") String secret,
 			@RequestParam("answer") String answer,
 
@@ -534,12 +522,31 @@ public class AccountController {
 		mv.addObject("name", name);
 		mv.addObject("email", email);
 		mv.addObject("password", password);
-		mv.addObject("tel", tel);
-		mv.addObject("address", address);
 		mv.addObject("secret", secret);
 		mv.addObject("answer", answer);
 
 		mv.setViewName("edit");
+		return mv;
+
+	}
+
+	//変更画面からお客様情報に戻る
+	@RequestMapping("/customer/back")
+	public ModelAndView customer_(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+
+		Account account = new Account(code, name, email, password, secret, answer);
+		accountRepository.saveAndFlush(account);
+
+		//Thymeleafで表示する準備
+		mv.addObject("account", account);
+		mv.setViewName("customer");
 		return mv;
 
 	}
@@ -551,22 +558,18 @@ public class AccountController {
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
 			@RequestParam("password") String password,
-			@RequestParam("tel") String tel,
-			@RequestParam("address") String address,
 			@RequestParam("secret") String secret,
 			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || tel == "" || address == "" || secret == "" || answer == "") {
+		if (name == "" || email == "" ||  secret == "" || answer == "") {
 
-			mv.addObject("error", "未入力項目があります。");
+			mv.addObject("error", "未入力項目があります");
 			mv.addObject("code",code);
 			mv.addObject("name",name);
 			mv.addObject("email",email);
 			mv.addObject("password",password);
-			mv.addObject("tel",tel);
-			mv.addObject("address",address);
 			mv.addObject("secret",secret);
 			mv.addObject("answer",answer);
 			mv.setViewName("edit");
@@ -575,7 +578,7 @@ public class AccountController {
 		} else {
 
 			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(code, name, email, password, tel, address, secret, answer);
+			Account account = new Account(code, name, email, password, secret, answer);
 			accountRepository.saveAndFlush(account);
 
 			Account customerInfo = accountRepository.findByName(name);
@@ -584,7 +587,7 @@ public class AccountController {
 			mv.addObject("customerInfo", customerInfo);
 
 			mv.addObject("account", account);
-			mv.addObject("error", "変更が完了しました。");
+			mv.addObject("error", "変更が完了しました");
 
 			mv.setViewName("customer");
 			return mv;

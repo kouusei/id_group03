@@ -25,12 +25,6 @@ public class Account {
 	@Column(name="password")
 	private String password;
 
-	@Column(name="tel")
-	private String tel;
-
-	@Column(name="address")
-	private String address;
-
 	@Column(name="secret")
 	private String secret;
 
@@ -41,13 +35,11 @@ public class Account {
 
 	}
 
-	public Account(int code, String name, String email ,String password ,String tel, String address, String secret, String answer) {
+	public Account(int code, String name, String email ,String password, String secret, String answer) {
 		this.code = code;
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.tel = tel;
-		this.address = address;
 		this.secret = secret;
 		this.answer = answer;
 	}
@@ -63,12 +55,10 @@ public class Account {
 		this.password = password;
 	}
 
-	public Account(String name, String email, String password ,String tel, String address, String secret, String answer) {
+	public Account(String name, String email, String password, String secret, String answer) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.tel = tel;
-		this.address = address;
 		this.secret = secret;
 		this.answer = answer;
 	}
@@ -103,22 +93,6 @@ public class Account {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getTel() {
-		return tel;
-	}
-
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-
-	public String getAddress() {
-		return address;
-	}
-
-	public void setAddress(String address) {
-		this.address = address;
 	}
 
 	public String getSecret() {
