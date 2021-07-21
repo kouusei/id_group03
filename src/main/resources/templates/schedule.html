@@ -74,7 +74,7 @@
 			<!-- 開始時間の指定 -->
 			<select name="starthour">
 				<option value="">--時
-				<option th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}" th:text="${i}+ '時'">
+				<option th:each="i : ${#numbers.sequence(0, 24)}" th:value="${i}" th:text="${i}+ '時'">
 			</select>
 			<select name="startminute">
 				<option value="00">00分
@@ -84,7 +84,7 @@
 			<!-- 終了時間の指定 -->
 			<select name="endhour">
 				<option value="">--時
-				<option th:each="i : ${#numbers.sequence(1, 24)}" th:value="${i}" th:text="${i}+ '時'">
+				<option th:each="i : ${#numbers.sequence(0, 24)}" th:value="${i}" th:text="${i}+ '時'">
 			</select>
 			<select name="endminute">
 				<option value="00">00分
