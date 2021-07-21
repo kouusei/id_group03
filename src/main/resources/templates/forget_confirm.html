@@ -10,14 +10,14 @@
 	<form action="/forget_confirm" method="post" th:if="${session.password} == null">
 		<div th:text="${error}" style="color: red;"></div>
 		<h1>秘密の質問</h1>
-		<div class=" box-after"><span class="box-title">質問</span><div class="confirm" th:text="${account.secret}" th:value="${secret}"></div></div>
+		<div class=" box-after"><span class="box-title">質問</span><div class="confirm" th:text="${account.secret}"></div></div>
 		<div class=" box-after" style="margin-top:0px;"><input class="confirm" name="answer" placeholder="質問の答え" type="text"></div>
 		<input type="hidden" name="secret" th:value="${account.secret}">
 		<button class="btn">回答</button>
 	</form>
 
 	<form th:if="${session.password} != null">
-		<h1>パスワード</h1>
+		<h1>パスワードの<br>再設定</h1>
 		<div th:text="${success}" style="color: red;"></div>
 		<div class=" box-after" style="margin-top:30px;"><div class="confirm" th:text="${account.password}"></div></div>
 	</form>

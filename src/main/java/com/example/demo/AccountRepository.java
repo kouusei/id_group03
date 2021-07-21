@@ -12,7 +12,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
 	Account findByName(String name);
 
-	List<Account> findByAnswerLike(String answer);
+	List<Account> findBySecretLikeAndAnswerLike(String secret,String answer);
 
 	List<Account> findByEmailLike(String email);
 
