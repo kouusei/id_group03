@@ -13,6 +13,10 @@
 	overflow: auto;
 }
 
+.datecolor{
+	color:black;
+}
+
 .button-container-calendar button {
 	cursor: pointer;
 	display: inline-block;

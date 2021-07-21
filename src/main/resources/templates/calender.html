@@ -180,7 +180,15 @@
 						  break;
 					  }
 				  }
-	              cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '">'+date+"</a>" + "<br>" + s + "</span>";
+
+				  var week = getWeek(year, month, date);
+				  if(week == 0){
+					  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" style="color:red;">'+date+"</a>" + "<br>" + s + "</span>";
+				  }else if(week == 6){
+					  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" style="color:blue;">'+date+"</a>" + "<br>" + s + "</span>";
+				  }else{
+	              	  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" class="datecolor">'+date+"</a>" + "<br>" + s + "</span>";
+				  }
 
 	              if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
 	                  cell.className = "date-picker selected";
@@ -196,13 +204,20 @@
 
 	      tbl.appendChild(row);
 	  }
-
+	  //getWeek();
 	}
 
 	//1か月の日数を設定
 	function daysInMonth(iMonth, iYear) {
 	  return 32 - new Date(iYear, iMonth, 32).getDate();
 	}
+
+	function getWeek(year, month, day){
+		var date = new Date(year, month, day);
+		//var date = new Date(2021, 6, 21);
+		return date.getDay();
+	}
+
 	/*]]>*/
 </script>
 
