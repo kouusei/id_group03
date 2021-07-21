@@ -49,13 +49,6 @@ public class AccountController {
 			@RequestParam("password") String password,
 			ModelAndView mv) {
 
-		//emailとpasswordがからの場合エラー
-		if (email == null || email.length() == 0 || password == null || password.length() == 0) {
-			mv.addObject("error", "未入力項目があります");
-			mv.setViewName("login");
-			return mv;
-
-		} else {
 			//Accountテーブルから指定したレコードを取得
 			List<Account> record = accountRepository.findByEmailLikeAndPasswordLike(email, password);
 
@@ -64,7 +57,7 @@ public class AccountController {
 				mv.addObject("error2", "一致しません");
 				mv.setViewName("login");
 				return mv;
-			}
+			} else {
 
 			Account customerInfo = record.get(0);
 			List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
@@ -105,14 +98,7 @@ public class AccountController {
 
 		List<Account> _email = accountRepository.findByEmailLike(email);
 
-		if (email == "") {
-
-			mv.addObject("error", "メールアドレスを");
-			mv.addObject("error2", "入力してください");
-			mv.setViewName("forget");
-			return mv;
-
-		} else if (_email.size() == 0) {
+		if (_email.size() == 0) {
 
 			mv.addObject("error", "メールアドレスが");
 			mv.addObject("error2", "登録されていません");
@@ -138,15 +124,7 @@ public class AccountController {
 
 		List<Account> account = accountRepository.findBySecretLikeAndAnswerLike(secret,answer);
 
-		if (answer == "") {
-
-			mv.addObject("error", "回答してください");
-			mv.addObject("account", account);
-			mv.addObject("secret", secret);
-			mv.setViewName("forget_confirm");
-			return mv;
-
-		} else if (account.size() == 0) {
+		if (account.size() == 0) {
 
 			mv.addObject("error", "回答が間違っています");
 			mv.addObject("account", account);
@@ -188,12 +166,13 @@ public class AccountController {
 			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
+		List<Account> Name = accountRepository.findByName(name);
 		List<Account> Email = accountRepository.findByEmailLike(email);
 
 		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" || password == "" || password2 == ""  || secret == ""
-				|| answer == "") {
-			mv.addObject("error", "未入力項目があります");
+		if (Name.size() != 0) {
+			mv.addObject("error", "既にこの名前は");
+			mv.addObject("error2", "登録されています");
 			mv.addObject("name", name);
 			mv.addObject("email", email);
 			mv.addObject("password", password);
@@ -206,6 +185,12 @@ public class AccountController {
 		} else if (Email.size() != 0) {
 			mv.addObject("error", "既にこのメールアドレスは");
 			mv.addObject("error2", "登録されています");
+			mv.addObject("name", name);
+			mv.addObject("email", email);
+			mv.addObject("password", password);
+			mv.addObject("password2", password2);
+			mv.addObject("secret", secret);
+			mv.addObject("answer", answer);
 			mv.setViewName("signup");
 			return mv;
 
@@ -312,7 +297,7 @@ public class AccountController {
 			@PathVariable(name = "customerInfo.name") String name,
 			ModelAndView mv) {
 
-		Account accountList = accountRepository.findByName(name);
+		Account accountList = accountRepository.findByNameLike(name);
 
 		mv.addObject("account", accountList);
 		mv.setViewName("customer");
@@ -541,26 +526,11 @@ public class AccountController {
 			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
-		//未入力、パスワードが違えばエラー表示
-		if (name == "" || email == "" ||  secret == "" || answer == "") {
-
-			mv.addObject("error", "未入力項目があります");
-			mv.addObject("code",code);
-			mv.addObject("name",name);
-			mv.addObject("email",email);
-			mv.addObject("password",password);
-			mv.addObject("secret",secret);
-			mv.addObject("answer",answer);
-			mv.setViewName("edit");
-			return mv;
-
-		} else {
-
 			//登録するAccountエンティティのインスタンスを生成
 			Account account = new Account(code, name, email, password, secret, answer);
 			accountRepository.saveAndFlush(account);
 
-			Account customerInfo = accountRepository.findByName(name);
+			Account customerInfo = accountRepository.findByNameLike(name);
 
 			session.setAttribute("customerInfo", customerInfo);
 			mv.addObject("customerInfo", customerInfo);
@@ -571,7 +541,6 @@ public class AccountController {
 			mv.setViewName("customer");
 			return mv;
 
-		}
 	}
 
 }

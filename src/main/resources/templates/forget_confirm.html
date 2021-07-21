@@ -11,7 +11,7 @@
 		<div th:text="${error}" style="color: red;"></div>
 		<h1>秘密の質問</h1>
 		<div class=" box-after"><span class="box-title">質問</span><div class="confirm" th:text="${account.secret}"></div></div>
-		<div class=" box-after" style="margin-top:0px;"><input class="confirm" name="answer" placeholder="質問の答え" type="text"></div>
+		<div class=" box-after" style="margin-top:0px;"><input class="confirm" name="answer" placeholder="質問の答え" type="text" required></div>
 		<input type="hidden" name="secret" th:value="${account.secret}">
 		<button class="btn">回答</button>
 	</form>

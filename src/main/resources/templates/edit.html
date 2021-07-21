@@ -11,10 +11,10 @@
 		<input type="hidden" name="code" th:value="${code}">
 		<input type="hidden" name="password" th:value="${password}">
 		<h1>お客様情報<br>変更</h1>
-		<div class=" box-after"><span class="box-title">名前</span><input class="confirm" type="text" name="name" th:value="${name}" placeholder="名前"></div>
-		<div class=" box-after"><span class="box-title">メールアドレス</span><input class="confirm" type="email" name="email" th:value="${email}" placeholder="メールアドレス"></div>
-		<div class=" box-after"><span class="box-title">秘密の質問</span><input class="confirm" type="text" name="secret" th:value="${secret}" placeholder="秘密の質問"></div>
-		<div class=" box-after"><span class="box-title">質問の答え</span><input class="confirm" type="text" name="answer" th:value="${answer}" placeholder="質問の答え"></div>
+		<div class=" box-after"><span class="box-title">名前</span><input class="confirm" type="text" name="name" th:value="${name}" placeholder="名前" required></div>
+		<div class=" box-after"><span class="box-title">メールアドレス</span><input class="confirm" type="email" name="email" th:value="${email}" placeholder="メールアドレス" required></div>
+		<div class=" box-after"><span class="box-title">秘密の質問</span><input class="confirm" type="text" name="secret" th:value="${secret}" placeholder="秘密の質問" required></div>
+		<div class=" box-after"><span class="box-title">質問の答え</span><input class="confirm" type="text" name="answer" th:value="${answer}" placeholder="質問の答え" required></div>
 		<button class="btn">更新</button>
 	</form>
 

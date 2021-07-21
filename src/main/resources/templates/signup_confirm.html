@@ -11,16 +11,11 @@
 		<h1>新規登録</h1>
 		<div class=" box-after"><span class="box-title">名前</span><div class="confirm" th:text="${name}"></div></div>
 		<div class=" box-after"><span class="box-title">メールアドレス</span><div class="confirm" th:text="${email}"></div></div>
-		<div class=" box-after"><span class="box-title">パスワード</span><input type="password" class="confirm" th:text="${password}"></div>
+		<div class=" box-after"><span class="box-title">パスワード</span><div class="confirm">*****</div></div>
 		<div class=" box-after"><span class="box-title">秘密の質問</span><div class="confirm" th:text="${secret}"></div></div>
 		<div class=" box-after"><span class="box-title">質問の答え</span><div class="confirm" th:text="${answer}"></div></div>
-		<input type="hidden" name="name" th:value="${name}">
-		<input type="hidden" name="email" th:value="${email}">
-		<input type="hidden" name="password" th:value="${password}">
-		<input type="hidden" name="secret" th:value="${secret}">
-		<input type="hidden" name="answer" th:value="${answer}">
 		<button class="btn">登録</button>
-	</form><br>
+	</form>
 	<h5>
 		<a href="/signup">新規登録画面に戻る</a>
 	</h5>
