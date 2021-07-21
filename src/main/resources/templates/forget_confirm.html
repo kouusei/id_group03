@@ -16,12 +16,6 @@
 		<button class="btn">回答</button>
 	</form>
 
-	<form th:if="${session.password} != null">
-		<h1>パスワードの<br>再設定</h1>
-		<div th:text="${success}" style="color: red;"></div>
-		<div class=" box-after" style="margin-top:30px;"><div class="confirm" th:text="${account.password}"></div></div>
-	</form>
-
 	<h5>
 		<a href="/login/back">ログイン画面に戻る</a>
 	</h5>

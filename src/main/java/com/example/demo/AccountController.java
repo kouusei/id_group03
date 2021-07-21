@@ -126,20 +126,52 @@ public class AccountController {
 
 		if (account.size() == 0) {
 
+			Account _account = new Account(secret);
 			mv.addObject("error", "回答が間違っています");
-			mv.addObject("account", account);
-			mv.addObject("secret", secret);
+			mv.addObject("account", _account);
 			mv.setViewName("forget_confirm");
 			return mv;
 
 		} else {
 
 			Account _account = account.get(0);
-			session.setAttribute("password", account);
-			mv.addObject("success", "パスワードはこちらです");
 			mv.addObject("account", _account);
-			mv.setViewName("forget_confirm");
+			mv.setViewName("reset");
 
+			return mv;
+		}
+
+	}
+
+	//パスワード忘れ画面
+	@PostMapping("/reset")
+	public ModelAndView reset(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("password2") String password2,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+
+		if (!password.equals(password2)) {
+
+			Account account = new Account(code, name, email, secret, answer);
+			mv.addObject("account", account);
+			mv.addObject("error", "パスワードが");
+			mv.addObject("error2", "一致していません");
+			mv.setViewName("reset");
+			return mv;
+
+		} else {
+
+			Account account = new Account(code, name, email, password, secret, answer);
+			accountRepository.saveAndFlush(account);
+			mv.addObject("account", account);
+			mv.addObject("error", "パスワードが");
+			mv.addObject("error2", "再設定されました");
+			mv.setViewName("reset");
 			return mv;
 		}
 
@@ -149,9 +181,7 @@ public class AccountController {
 	@RequestMapping("/login/back")
 	public ModelAndView login_back(ModelAndView mv) {
 
-		session.invalidate();
 		mv.setViewName("login");
-
 		return mv;
 	}
 

@@ -49,6 +49,10 @@ public class Account {
 		this.answer = answer;
 	}
 
+	public Account(String secret) {
+		this.secret = secret;
+	}
+
 	public Account(String name, String email, String password) {
 		this.name = name;
 		this.email = email;
@@ -59,6 +63,14 @@ public class Account {
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.secret = secret;
+		this.answer = answer;
+	}
+
+	public Account(int code, String name, String email, String secret, String answer) {
+		this.code = code;
+		this.name = name;
+		this.email = email;
 		this.secret = secret;
 		this.answer = answer;
 	}
