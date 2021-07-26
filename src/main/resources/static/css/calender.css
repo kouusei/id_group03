@@ -1,5 +1,7 @@
 @charset "UTF-8";
-
+body{
+	text-align :center;
+}
 .wrapper {
 	margin: 15px auto;
 	max-width: 700px;
@@ -41,9 +43,30 @@
 	vertical-align: top;
 }
 
-tbody.pop td:hover{
+#display{
+	display:inline;
+	position:fixed;
+	top:500px;
+	left:500px;
+}
 
+tbody td:hover{
 	background: #00ffff;
+}
+
+.calendar-body td p {
+display: none;
+}
+
+.calendar-body td:hover p {
+display: inline;
+position: absolute;
+background-color: #cccccc;
+color: #000000;
+border-style: solid;
+border-width: 1px;
+border-color: #dedede #666666 #666666 #dedede;
+font-size: .9em;
 }
 
 .table-contents {

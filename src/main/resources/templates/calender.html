@@ -7,6 +7,7 @@
 
 </head>
 <body>
+<p id="display">ポップアップ表示</p>
 <div class="container-calendar">
 		<!-- 年月を表示 -->
           <h4 id="monthAndYear"></h4>
@@ -20,7 +21,7 @@
 		  <!-- カレンダー本体 -->
           <table class="table-calendar" id="calendar" data-lang="ja">
               <thead id="thead-month"></thead>
-              <tbody id="calendar-body" class="pop"></tbody>
+              <tbody id="calendar-body"></tbody>
           </table>
 
 		<!-- 年月を選択すると、選択した年と月のカレンダーが表示される -->
@@ -129,6 +130,7 @@
 	  showCalendar(currentMonth, currentYear);
 	}
 
+	 var cell;
 	//カレンダーの本体部分の表示
 	function showCalendar(month, year) {
 	  //javaのlistをjavascriptの配列にセット
@@ -146,7 +148,9 @@
 
 	  // creating all cells（カレンダーを格納するセルの作成）
 	  var date = 1;
+	  var num = 0;
 
+	  var cells = [];
 	  for ( var i = 0; i < 6; i++ ) {
 	      var row = document.createElement("tr");
 
@@ -160,8 +164,10 @@
 	              break;
 	          } else {
 	          	  //セル生成
-	              cell = document.createElement("td");
-	              cell.setAttribute("data-date", date);
+	              cell= document.createElement("td");
+
+	              cell.setAttribute("data-date" + String(num), date);
+
 	              cell.setAttribute("data-month", month + 1);
 	              cell.setAttribute("data-year", year);
 	              cell.setAttribute("data-month_name", months[month]);
@@ -170,30 +176,59 @@
 	        	  var date1 = "" + date;
 	        	  month1 = month1.length == 1 ? "0" + month1 : month1;
 	        	  date1 = date1.length == 1 ? "0" + date1 : date1;
+	        	  /* cells[num] = cell;
+
+				  cell.onmouseover = function(e){
+					  cell.cellIndex = 0;
+					  alert(cell);
+				  }
+
+				  num++; */
+
+				 /*  cells[num] = cell;
+				  dates[num] = num+1;
+
+				  num++; */
+				  /* var d = cells[0].getAttribute("data-date");
+				  alert(d); */
+
 	              var comparison = year + "/" + month1 + "/" + date1;
+	              var work = "仕事";
+	              var event = "イベント";
+	              var tennis = "テニス";
 
 	        	  //alert(hoge[0].scheduledate + " " + comparison);
 				  var s = "";
 				  for(var t=0; t<hoge.length; t++){
-					  if(hoge[t].scheduledate == comparison){
+					  if(hoge[t].scheduledate == comparison && hoge[t].schedule == work){
+						  s = "■";
+						  break;
+					  }else if(hoge[t].scheduledate == comparison && hoge[t].schedule == event){
 						  s = "★";
+						  break;
+					  }else if(hoge[t].scheduledate == comparison && hoge[t].schedule == tennis){
+						  s = "●";
 						  break;
 					  }
 				  }
 
 				  var week = getWeek(year, month, date);
 				  if(week == 0){
-					  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" style="color:red;">'+date+"</a>" + "<br>" + s + "</span>";
+
+					  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" style="color:red;" onmouseover="javascript:f('+year+','+month1+','+date1+');">'+date+"</a>" + "<br>" + s + "</span>";
+
 				  }else if(week == 6){
-					  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" style="color:blue;">'+date+"</a>" + "<br>" + s + "</span>";
+
+					  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" style="color:blue;" onmouseover="javascript:f('+year+','+month1+','+date1+');">'+date+"</a>" + "<br>" + s + "</span>";
+
 				  }else{
-	              	  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" class="datecolor">'+date+"</a>" + "<br>" + s + "</span>";
+
+	              	  cell.innerHTML = "<span>" +'<a href="/calender/'+ date1 +"/" + month1 + "/"+ year + '" class="datecolor" onmouseover="javascript:f('+year+','+month1+','+date1+');">'+date+"</a>" + "<br>" + s + "</span>";
+
 				  }
 
 	              if ( date === today.getDate() && year === today.getFullYear() && month === today.getMonth() ) {
 	                  cell.className = "date-picker selected";
-
-
 	              }
 
 	              row.appendChild(cell);
@@ -204,7 +239,20 @@
 
 	      tbl.appendChild(row);
 	  }
-	  //getWeek();
+
+	    /* for(var i=0;i<cells.length;i++){
+		  cells[i].onmouseover = function(){
+			  var d = cells[i].getAttribute("data-date");
+			  alert(cells[i].getAttribute("data-date"));
+		  }
+	  } */
+	}
+
+	function f(year,month1,date1){
+		//alert(""+year+month1+date1);
+		//alert(cell.getAttribute("data-date" + String(num)));
+		document.getElementById("display").innerHTML = "" + year + month1 + date1;
+		//(cells[i].getAttribute("data-date"));
 	}
 
 	//1か月の日数を設定

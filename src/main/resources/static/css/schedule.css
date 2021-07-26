@@ -17,7 +17,11 @@ table.sche th{
 	color:#fff;
 	border-bottom: solid 2px #fb5144;
   	padding: 10px 0;
-  	width:80px;
+
+}
+
+td.yotei{
+	width:50px;
 }
 
 table.schedule{
