@@ -12,8 +12,8 @@
 		<h1>新規登録</h1>
 		<input class="confirm" type="text" name="name" placeholder="名前" th:value="${name}" required>
 		<input class="confirm" type="email" name="email" placeholder="メールアドレス" th:value="${email}" required>
-		<input class="confirm" type="password" name="password" placeholder="パスワード" th:value="${password}" required>
-		<input class="confirm" type="password" name="password2" placeholder="パスワード(確認)" th:value="${password2}" required>
+		<input class="confirm" type="password" name="password" placeholder="パスワード(8文字以上)" th:value="${password}" minlength="8" pattern="^[a-zA-Z0-9]+$" required>
+		<input class="confirm" type="password" name="password2" placeholder="パスワード(確認)" th:value="${password2}" minlength="8" pattern="^[a-zA-Z0-9]+$" required>
 		<input class="confirm" type="text" name="secret" placeholder="秘密の質問" th:value="${secret}" required>
 		<input class="confirm" type="text" name="answer" placeholder="質問の答え" th:value="${answer}" required>
 		<button class="btn">確認</button>

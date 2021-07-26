@@ -2,13 +2,13 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
 <meta charset="UTF-8">
-<title>お客様情報</title>
+<title>お客様情報変更</title>
 </head>
-<link th:href="@{/css/customer.css}" rel="stylesheet" type="text/css">
+<link th:href="@{/css/customer_confirm.css}" rel="stylesheet" type="text/css">
 <body>
-	<form class="form" action="/edit" method="post">
-		<div class="complete" th:text="${error}"></div>
-		<h1>お客様情報</h1>
+	<div class="attention" th:text="${error}"></div>
+	<form class="form" action="/customer_change" method="post">
+		<h1>お客様情報変更</h1>
 		<div class=" box-after"><span class="box-title">名前</span><div class="confirm" th:text="${account.name}"></div></div>
 		<div class=" box-after"><span class="box-title">メールアドレス</span><div class="confirm" th:text="${account.email}"></div></div>
 		<div class=" box-after"><span class="box-title">秘密の質問</span><div class="confirm" th:text="${account.secret}"></div></div>
@@ -22,18 +22,12 @@
 		<button class="btn">変更</button>
 	</form>
 
-	<form action="/resetpass" method="post">
+	<form action="/resetpass" method="get">
 	<h5>
 		<input type="hidden" name="name" th:value="${account.name}">
-		<input type="submit" class="pass" value="パスワードの再設定">
+		<input type="submit" class="pass" value="お客様情報に戻る">
 	</h5>
 	</form>
 
-	<h5>
-		<a href="/edit/calender">カレンダーに戻る</a>
-	</h5>
-	<h5>
-		<a href="/logout">ログアウト</a>
-	</h5>
 </body>
 </html>

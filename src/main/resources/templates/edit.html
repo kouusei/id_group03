@@ -6,16 +6,23 @@
 </head>
 <link th:href="@{/css/edit.css}" rel="stylesheet" type="text/css">
 <body>
-	<form action="/customer" method="post">
+	<form class="form" action="/customer_confirm" method="post">
 		<div th:text="${error}" style="color: red; margin-top: 30px;"></div>
-		<input type="hidden" name="code" th:value="${code}">
-		<input type="hidden" name="password" th:value="${password}">
 		<h1>お客様情報<br>変更</h1>
-		<div class=" box-after"><span class="box-title">名前</span><input class="confirm" type="text" name="name" th:value="${name}" placeholder="名前" required></div>
-		<div class=" box-after"><span class="box-title">メールアドレス</span><input class="confirm" type="email" name="email" th:value="${email}" placeholder="メールアドレス" required></div>
-		<div class=" box-after"><span class="box-title">秘密の質問</span><input class="confirm" type="text" name="secret" th:value="${secret}" placeholder="秘密の質問" required></div>
-		<div class=" box-after"><span class="box-title">質問の答え</span><input class="confirm" type="text" name="answer" th:value="${answer}" placeholder="質問の答え" required></div>
-		<button class="btn">更新</button>
+		<div class=" box-after"><span class="box-title">名前</span><input class="confirm" type="text" name="name" th:value="${account.name}" placeholder="名前" required></div>
+		<div class=" box-after"><span class="box-title">メールアドレス</span><input class="confirm" type="email" name="email" th:value="${account.email}" placeholder="メールアドレス" required></div>
+		<div class=" box-after"><span class="box-title">秘密の質問</span><input class="confirm" type="text" name="secret" th:value="${account.secret}" placeholder="秘密の質問" required></div>
+		<div class=" box-after"><span class="box-title">質問の答え</span><input class="confirm" type="text" name="answer" th:value="${account.answer}" placeholder="質問の答え" required></div>
+		<input type="hidden" name="code" th:value="${account.code}">
+		<input type="hidden" name="password" th:value="${account.password}">
+		<button class="btn">確認</button>
+	</form>
+
+	<form action="/resetpass" method="get">
+	<h5>
+		<input type="hidden" name="name" th:value="${account.name}">
+		<input type="submit" class="pass" value="お客様情報に戻る">
+	</h5>
 	</form>
 
 </body>

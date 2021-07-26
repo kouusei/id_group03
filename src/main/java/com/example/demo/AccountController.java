@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -185,7 +186,7 @@ public class AccountController {
 		return mv;
 	}
 
-	//新規登録後
+	//新規登録確認
 	@PostMapping("/signup_confirm")
 	public ModelAndView signup_error(
 			@RequestParam("name") String name,
@@ -345,6 +346,18 @@ public class AccountController {
 		Account account = accountRepository.findByNameLike(name);
 		mv.addObject("account", account);
 		mv.setViewName("passreset");
+		return mv;
+	}
+
+	//お客様情報画面からパスワードの再設定
+	@GetMapping("/resetpass")
+	public ModelAndView resetpass2(
+			@RequestParam("name") String name,
+			ModelAndView mv) {
+
+		Account account = accountRepository.findByNameLike(name);
+		mv.addObject("account", account);
+		mv.setViewName("customer");
 		return mv;
 	}
 
@@ -583,20 +596,35 @@ public class AccountController {
 			ModelAndView mv) {
 
 		//Thymeleafで表示する準備
-		mv.addObject("code", code);
-		mv.addObject("name", name);
-		mv.addObject("email", email);
-		mv.addObject("password", password);
-		mv.addObject("secret", secret);
-		mv.addObject("answer", answer);
-
+		Account account = new Account(code, name, email, password, secret, answer);
+		mv.addObject("account", account);
 		mv.setViewName("edit");
 		return mv;
 
 	}
 
+	//お客様情報変更確認
+	@PostMapping("/customer_confirm")
+	public ModelAndView customer_confirm(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+
+		Account account = new Account(code, name, email, password, secret, answer);
+
+		mv.addObject("account", account);
+		mv.addObject("error", "以下の情報でよろしいですか?");
+		mv.setViewName("customer_confirm");
+		return mv;
+
+	}
+
 	//お客様情報変更後戻る
-	@PostMapping("/customer")
+	@PostMapping("/customer_change")
 	public ModelAndView edit(
 			@RequestParam("code") int code,
 			@RequestParam("name") String name,
