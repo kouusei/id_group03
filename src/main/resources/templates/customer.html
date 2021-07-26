@@ -24,13 +24,8 @@
 
 	<form action="/resetpass" method="post">
 	<h5>
-		<input type="hidden" name="code" th:value="${account.code}">
 		<input type="hidden" name="name" th:value="${account.name}">
-		<input type="hidden" name="email" th:value="${account.email}">
-		<input type="hidden" name="password" th:value="${account.password}">
-		<input type="hidden" name="secret" th:value="${account.secret}">
-		<input type="hidden" name="answer" th:value="${account.answer}">
-		<a href="/resetpass">パスワードの再設定</a>
+		<input type="submit" class="pass" value="パスワードの再設定">
 	</h5>
 	</form>
 

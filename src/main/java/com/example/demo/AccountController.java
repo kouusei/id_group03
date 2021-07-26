@@ -339,18 +339,47 @@ public class AccountController {
 	//お客様情報画面からパスワードの再設定
 	@RequestMapping("/resetpass")
 	public ModelAndView resetpass(
-			@RequestParam("code") int code,
 			@RequestParam("name") String name,
-			@RequestParam("email") String email,
-			@RequestParam("password") String password,
-			@RequestParam("secret") String secret,
-			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
 		Account account = accountRepository.findByNameLike(name);
 		mv.addObject("account", account);
-		mv.setViewName("reset");
+		mv.setViewName("passreset");
 		return mv;
+	}
+
+	//パスワード再設定画面
+	@RequestMapping("/passreset")
+	public ModelAndView passreset(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("password2") String password2,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+
+		if (!password.equals(password2)) {
+
+			Account account = new Account(code, name, email, secret, answer);
+			mv.addObject("account", account);
+			mv.addObject("error", "パスワードが");
+			mv.addObject("error2", "一致していません");
+			mv.setViewName("passreset");
+			return mv;
+
+		} else {
+
+			Account account = new Account(code, name, email, password, secret, answer);
+			accountRepository.saveAndFlush(account);
+			mv.addObject("account", account);
+			mv.addObject("error", "パスワードが");
+			mv.addObject("error2", "再設定されました");
+			mv.setViewName("passreset");
+			return mv;
+		}
+
 	}
 
 	//お客様情報からカレンダーに戻る
@@ -588,6 +617,26 @@ public class AccountController {
 
 		mv.addObject("account", account);
 		mv.addObject("error", "変更が完了しました");
+
+		mv.setViewName("customer");
+		return mv;
+
+	}
+
+	//パスワード再設定からお客様情報に戻る
+	@RequestMapping("/customerback")
+	public ModelAndView customerback(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+
+		//登録するAccountエンティティのインスタンスを生成
+		Account account = new Account(code, name, email, password, secret, answer);
+		mv.addObject("account", account);
 
 		mv.setViewName("customer");
 		return mv;
