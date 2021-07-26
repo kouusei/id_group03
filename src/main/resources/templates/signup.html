@@ -7,7 +7,7 @@
 <link th:href="@{/css/signup.css}" rel="stylesheet" type="text/css">
 <body>
 	<form action="/signup_confirm" method="post">
-		<div th:text="${error}" style="color: red; margin-top: 30px;"></div>
+		<div th:text="${error}" style="color: red; margin-top: 15px;"></div>
 		<div th:text="${error2}" style="color: red; margin-top: 0px;"></div>
 		<h1>新規登録</h1>
 		<input class="confirm" type="text" name="name" placeholder="名前" th:value="${name}" required>

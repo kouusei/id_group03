@@ -49,15 +49,15 @@ public class AccountController {
 			@RequestParam("password") String password,
 			ModelAndView mv) {
 
-			//Accountテーブルから指定したレコードを取得
-			List<Account> record = accountRepository.findByEmailLikeAndPasswordLike(email, password);
+		//Accountテーブルから指定したレコードを取得
+		List<Account> record = accountRepository.findByEmailLikeAndPasswordLike(email, password);
 
-			if (record.size() == 0) {
-				mv.addObject("error", "メールアドレスかパスワードが");
-				mv.addObject("error2", "一致しません");
-				mv.setViewName("login");
-				return mv;
-			} else {
+		if (record.size() == 0) {
+			mv.addObject("error", "メールアドレスかパスワードが");
+			mv.addObject("error2", "一致しません");
+			mv.setViewName("login");
+			return mv;
+		} else {
 
 			Account customerInfo = record.get(0);
 			List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
@@ -115,14 +115,14 @@ public class AccountController {
 
 	}
 
-	//パスワード取得画面遷移
+	//パスワード再設定画面遷移
 	@RequestMapping("/forget_confirm")
 	public ModelAndView forget_confirm(
 			@RequestParam("secret") String secret,
 			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
-		List<Account> account = accountRepository.findBySecretLikeAndAnswerLike(secret,answer);
+		List<Account> account = accountRepository.findBySecretLikeAndAnswerLike(secret, answer);
 
 		if (account.size() == 0) {
 
@@ -143,7 +143,7 @@ public class AccountController {
 
 	}
 
-	//パスワード忘れ画面
+	//パスワード再設定画面
 	@PostMapping("/reset")
 	public ModelAndView reset(
 			@RequestParam("code") int code,
@@ -177,7 +177,7 @@ public class AccountController {
 
 	}
 
-	//ログイン画面
+	//パスワード再設定からログイン画面に戻る
 	@RequestMapping("/login/back")
 	public ModelAndView login_back(ModelAndView mv) {
 
@@ -281,13 +281,14 @@ public class AccountController {
 		date = date.length() == 1 ? "0" + date : date;
 		String scheduledate = year + "/" + month + "/" + date;
 		String scheduledates = year + "/" + month;
-		String times[] = { "00:00" ,"00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+		String times[] = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30",
+				"05:00", "05:30",
 				"06:00",
 				"06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
 				"12:00",
 				"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
 				"18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00",
-				"23:30"};
+				"23:30" };
 		mv.addObject("times", times);
 		List<Sche> records = scheRepository.findByScheduledate(scheduledate);
 		List<Sche> recordz = scheRepository.findByScheduledateLikeOrderByScheduledateAsc("%" + scheduledates + "%");
@@ -335,6 +336,23 @@ public class AccountController {
 		return mv;
 	}
 
+	//お客様情報画面からパスワードの再設定
+	@RequestMapping("/resetpass")
+	public ModelAndView resetpass(
+			@RequestParam("code") int code,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("password") String password,
+			@RequestParam("secret") String secret,
+			@RequestParam("answer") String answer,
+			ModelAndView mv) {
+
+		Account account = accountRepository.findByNameLike(name);
+		mv.addObject("account", account);
+		mv.setViewName("reset");
+		return mv;
+	}
+
 	//お客様情報からカレンダーに戻る
 	@RequestMapping("/edit/calender")
 	public ModelAndView edit_customer(
@@ -342,7 +360,6 @@ public class AccountController {
 
 		List<Sche> records = scheRepository.findAllByOrderByScheduledateAsc();
 		mv.addObject("records", records);
-
 		mv.setViewName("calender");
 
 		return mv;
@@ -374,13 +391,14 @@ public class AccountController {
 		if (year == "" || month == "" || date == "" || starthour == "" || startminute == "" || endhour == ""
 				|| endminute == "" || schedule == "") {
 
-			String times[] = { "00:00" ,"00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+			String times[] = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30",
+					"05:00", "05:30",
 					"06:00",
 					"06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
 					"12:00",
 					"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
 					"18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00",
-					"23:30"};
+					"23:30" };
 			mv.addObject("times", times);
 			month = month.length() == 1 ? "0" + month : month;
 			date = date.length() == 1 ? "0" + date : date;
@@ -403,13 +421,14 @@ public class AccountController {
 			return mv;
 
 		} else if (Start + starT > End + enD) {
-			String times[] = { "00:00" ,"00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+			String times[] = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30",
+					"05:00", "05:30",
 					"06:00",
 					"06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
 					"12:00",
 					"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
 					"18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00",
-					"23:30"};
+					"23:30" };
 			mv.addObject("times", times);
 			month = month.length() == 1 ? "0" + month : month;
 			date = date.length() == 1 ? "0" + date : date;
@@ -432,13 +451,14 @@ public class AccountController {
 			return mv;
 
 		} else {
-			String times[] = { "00:00" ,"00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+			String times[] = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30",
+					"05:00", "05:30",
 					"06:00",
 					"06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
 					"12:00",
 					"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
 					"18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00",
-					"23:30"};
+					"23:30" };
 			mv.addObject("times", times);
 			month = month.length() == 1 ? "0" + month : month;
 			date = date.length() == 1 ? "0" + date : date;
@@ -480,13 +500,14 @@ public class AccountController {
 
 		scheRepository.deleteById(code);
 
-		String times[] = { "00:00" ,"00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30", "05:00", "05:30",
+		String times[] = { "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", "03:00", "03:30", "04:00", "04:30",
+				"05:00", "05:30",
 				"06:00",
 				"06:30", "07:00", "07:30", "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", "11:00", "11:30",
 				"12:00",
 				"12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30",
 				"18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00",
-				"23:30"};
+				"23:30" };
 		mv.addObject("times", times);
 		month = month.length() == 1 ? "0" + month : month;
 		date = date.length() == 1 ? "0" + date : date;
@@ -556,20 +577,20 @@ public class AccountController {
 			@RequestParam("answer") String answer,
 			ModelAndView mv) {
 
-			//登録するAccountエンティティのインスタンスを生成
-			Account account = new Account(code, name, email, password, secret, answer);
-			accountRepository.saveAndFlush(account);
+		//登録するAccountエンティティのインスタンスを生成
+		Account account = new Account(code, name, email, password, secret, answer);
+		accountRepository.saveAndFlush(account);
 
-			Account customerInfo = accountRepository.findByNameLike(name);
+		Account customerInfo = accountRepository.findByNameLike(name);
 
-			session.setAttribute("customerInfo", customerInfo);
-			mv.addObject("customerInfo", customerInfo);
+		session.setAttribute("customerInfo", customerInfo);
+		mv.addObject("customerInfo", customerInfo);
 
-			mv.addObject("account", account);
-			mv.addObject("error", "変更が完了しました");
+		mv.addObject("account", account);
+		mv.addObject("error", "変更が完了しました");
 
-			mv.setViewName("customer");
-			return mv;
+		mv.setViewName("customer");
+		return mv;
 
 	}
 
